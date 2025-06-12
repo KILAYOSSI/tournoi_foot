@@ -1,0 +1,108 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Gestion des Cartons{% endblock %}
+
+{% block body %}
+<style>
+    .cartons-table {
+        border-collapse: separate;
+        border-spacing: 0 15px;
+        width: 100%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .cartons-table thead th {
+        background-color: #6f42c1;
+        color: white;
+        font-weight: 700;
+        text-align: center;
+        padding: 12px 15px;
+        border-radius: 10px 10px 0 0;
+    }
+    .cartons-table tbody tr {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        box-shadow: 0 4px 6px rgba(111, 66, 193, 0.1);
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+    .cartons-table tbody tr:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(111, 66, 193, 0.2);
+    }
+    .cartons-table tbody td {
+        padding: 15px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 1.1rem;
+        color: #4b3b75;
+    }
+    .carton-jaune {
+        background-color: #ffc107;
+        color: #212529;
+        font-weight: 700;
+        padding: 5px 10px;
+        border-radius: 20px;
+        display: inline-block;
+        min-width: 50px;
+    }
+    .carton-rouge {
+        background-color: #dc3545;
+        color: white;
+        font-weight: 700;
+        padding: 5px 10px;
+        border-radius: 20px;
+        display: inline-block;
+        min-width: 50px;
+    }
+    .player-name {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: #3e2c75;
+    }
+    .club-name {
+        font-style: italic;
+        color: #6f42c1;
+    }
+</style>
+
+<div class="container my-5">
+    <h1 class="text-center mb-4 fw-bold" style="color: #6f42c1;">Gestion des Cartons</h1>
+    <div class="table-responsive shadow rounded-4 p-3" style="background: #f3f0ff;">
+        <table class="cartons-table w-100">
+            <thead>
+                <tr>
+                    <th>Joueur</th>
+                    <th>Club</th>
+                    <th>Carton Jaune</th>
+                    <th>Carton Rouge</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for carton in cartons %}
+                    <tr>
+                        <td class="player-name">{{ carton.joueur.nom }}</td>
+                        <td class="club-name">{{ carton.joueur.club.nom }}</td>
+                        <td>
+                            {% if carton.type == 'jaune' %}
+                                <span class="carton-jaune">1</span>
+                            {% else %}
+                                0
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if carton.type == 'rouge' %}
+                                <span class="carton-rouge">1</span>
+                            {% else %}
+                                0
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">Aucun carton trouvé.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
