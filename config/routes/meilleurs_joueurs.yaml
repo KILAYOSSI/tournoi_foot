@@ -1,0 +1,3 @@
+meilleurs_joueurs:
+    path: /meilleurs-joueurs
+    controller: App\Controller\MeilleursJoueursController::index

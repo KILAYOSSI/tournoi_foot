@@ -1,0 +1,9 @@
+# Fichier de routes pour la partie admin sécurisée
+
+admin_dashboard:
+    path: /admin-panel
+    controller: App\Controller\Admin\AdminController::index
+
+admin_statistiques:
+    resource: ../../src/Controller/Admin/AdminStatistiqueController.php
+    type: annotation

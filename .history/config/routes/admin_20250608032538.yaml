@@ -1,0 +1,4 @@
+# Admin routes
+# app_admin_classement_poule:
+#     resource: '../../src/Controller/ClassementPouleController.php'
+#     type: annotation

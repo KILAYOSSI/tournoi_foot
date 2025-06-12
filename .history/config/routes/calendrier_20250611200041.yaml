@@ -1,0 +1,7 @@
+calendrier:
+    path: /calendrier
+    controller: App\Controller\CalendrierController::index
+
+calendrier_export_pdf:
+    path: /calendrier/export/pdf
+    controller: App\Controller\CalendrierController::exportPdf

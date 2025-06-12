@@ -1,0 +1,40 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Gestion des Joueurs{% endblock %}
+
+{% block body %}
+<h1>Liste des Joueurs</h1>
+
+<a href="{{ path('admin_joueurs_new') }}" class="btn btn-primary mb-3">Ajouter un joueur</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Poste</th>
+            <th>Club</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for joueur in joueurs %}
+            <tr>
+                <td>{{ joueur.nom }}</td>
+                <td>{{ joueur.poste }}</td>
+                <td>{{ joueur.club.nom }}</td>
+                <td>
+                    <a href="{{ path('admin_joueurs_edit', {'id': joueur.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+                    <form method="post" action="{{ path('admin_joueurs_delete', {'id': joueur.id}) }}" style="display:inline-block;" onsubmit="return confirm('Voulez-vous vraiment supprimer ce joueur ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ joueur.id) }}">
+                        <button class="btn btn-sm btn-danger">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun joueur trouvé.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

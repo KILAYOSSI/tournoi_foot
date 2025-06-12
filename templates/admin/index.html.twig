@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panneau d'administration{% endblock %}
+
+{% block body %}
+<h1>Bienvenue dans le panneau d'administration</h1>
+
+<nav>
+    <ul>
+        <li><a href="{{ path('admin_clubs') }}">Gestion des clubs</a></li>
+        <li><a href="{{ path('admin_joueurs') }}">Gestion des joueurs</a></li>
+        <li><a href="{{ path('admin_matchs') }}">Gestion des matchs</a></li>
+        <li><a href="{{ path('admin_resultats_index') }}">Gestion des résultats</a></li>
+        <li><a href="{{ path('admin_cartons') }}">Gestion des cartons</a></li>
+        <li><a href="{{ path('admin_statistiques') }}">Gestion des statistiques</a></li>
+    </ul>
+</nav>
+{% endblock %}

@@ -1,0 +1,9 @@
+# Fichier de routes pour les matchs
+
+matchs_list:
+    path: /matchs
+    controller: App\Controller\MatchController::list
+
+matchs_du_jour:
+    path: /matchs/du-jour
+    controller: App\Controller\MatchController::matchsDuJour

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cartons{% endblock %}
+
+{% block body %}
+<h1>Liste des cartons liés aux statistiques des matchs</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Rencontre</th>
+            <th>Joueur</th>
+            <th>Cartons Jaunes</th>
+            <th>Cartons Rouges</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in cartonsStats %}
+            <tr>
+                <td>{{ stat.rencontre.id }}</td>
+                <td>{{ stat.joueur.nom }}</td>
+                <td>{{ stat.cartonsjaunes }}</td>
+                <td>{{ stat.cartonsrouges }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune statistique trouvée.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Gestion des Statistiques{% endblock %}
+
+{% block body %}
+<h1>Liste des Statistiques</h1>
+
+<a href="{{ path('admin_statistiques_new') }}" class="btn btn-primary mb-3">Ajouter une statistique</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Rencontre</th>
+            <th>Joueur</th>
+            <th>Buts</th>
+            <th>Passes</th>
+            <th>Clean Sheet</th>
+            <th>Cartons Jaunes</th>
+            <th>Cartons Rouges</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for statistique in statistiques %}
+            <tr>
+                <td>
+                    {% if statistique.rencontre and statistique.rencontre.id %}
+                        {{ statistique.rencontre.id }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>
+                    {% if statistique.joueur and statistique.joueur.nom %}
+                        {{ statistique.joueur.nom }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>{{ statistique.buts }}</td>
+                <td>{{ statistique.passes }}</td>
+                <td>{{ statistique.cleansheet ? 'Oui' : 'Non' }}</td>
+                <td>{{ statistique.cartonsjaunes }}</td>
+                <td>{{ statistique.cartonsrouges }}</td>
+                <td>
+                    <a href="{{ path('admin_statistiques_edit', {'id': statistique.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+                    <form method="post" action="{{ path('admin_statistiques_delete', {'id': statistique.id}) }}" style="display:inline-block;" onsubmit="return confirm('Voulez-vous vraiment supprimer cette statistique ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ statistique.id) }}">
+                        <button class="btn btn-sm btn-danger">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucune statistique trouvée.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

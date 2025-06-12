@@ -1,0 +1,50 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Gestion des Résultats{% endblock %}
+
+{% block body %}
+<h1>Liste des Résultats</h1>
+
+<a href="{{ path('admin_resultats_new') }}" class="btn btn-primary mb-3">Ajouter un résultat</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Match</th>
+            <th>Score Domicile</th>
+            <th>Score Extérieur</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for resultat in resultats %}
+            <tr>
+                <td>
+                    {% if resultat.club1 and resultat.club2 %}
+                        {{ resultat.club1.nom }} vs {{ resultat.club2.nom }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>{{ resultat.scoreclub1 is not null ? resultat.scoreclub1 : 'N/A' }}</td>
+                <td>{{ resultat.scoreclub2 is not null ? resultat.scoreclub2 : 'N/A' }}</td>
+                <td>
+                    {% if resultat.id %}
+                        <a href="{{ path('admin_resultats_edit', {'id': resultat.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+                        <form method="post" action="{{ path('admin_resultats_delete', {'id': resultat.id}) }}" style="display:inline-block;" onsubmit="return confirm('Voulez-vous vraiment supprimer ce résultat ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ resultat.id) }}">
+                            <button class="btn btn-sm btn-danger">Supprimer</button>
+                        </form>
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun résultat trouvé.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

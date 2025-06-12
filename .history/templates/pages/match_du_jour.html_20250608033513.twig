@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Match du Jour{% endblock %}
+
+{% block body %}
+<h1>Match du Jour</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Club 1</th>
+            <th>Club 2</th>
+            <th>Score</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for match in matchsDuJour %}
+            <tr>
+                <td>{{ match.club1 }}</td>
+                <td>{{ match.club2 }}</td>
+                <td>{{ match.score }}</td>
+                <td>{{ match.date }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun match aujourd'hui.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

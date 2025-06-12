@@ -1,0 +1,4 @@
+admin_statistiques_index:
+  path: /admin/statistiques
+  controller: App\Controller\Admin\AdminStatistiqueController::index
+  methods: [GET]

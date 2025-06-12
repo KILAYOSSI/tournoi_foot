@@ -1,0 +1,15 @@
+parameters:
+  mtn_momo.api_user: '%env(MTN_MOMO_API_USER)%'
+  mtn_momo.api_key: '%env(MTN_MOMO_API_KEY)%'
+  mtn_momo.subscription_key: '%env(MTN_MOMO_SUBSCRIPTION_KEY)%'
+  mtn_momo.environment: '%env(MTN_MOMO_ENVIRONMENT)%' # sandbox or production
+  mtn_momo.callback_url: '%env(MTN_MOMO_CALLBACK_URL)%'
+
+services:
+  App\Service\MtnMomoService:
+    arguments:
+      $apiUser: '%mtn_momo.api_user%'
+      $apiKey: '%mtn_momo.api_key%'
+      $subscriptionKey: '%mtn_momo.subscription_key%'
+      $environment: '%mtn_momo.environment%'
+      $callbackUrl: '%mtn_momo.callback_url%'

@@ -1,0 +1,11 @@
+admin_resultats:
+  path: /admin-panel/resultats
+  controller: App\Controller\Admin\AdminResultatController::index
+  methods: [GET]
+
+admin_resultats_edit:
+  path: /admin-panel/resultats/{id}/edit
+  controller: App\Controller\Admin\AdminResultatController::edit
+  methods: [GET, POST]
+  requirements:
+    id: \d+

@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - Tournoi de Football{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,400|Poppins:400,600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(120deg, #f8e1f4 0%, #e3f0ff 100%), url('{{ asset("images/bg-foot.jpg") }}') center/cover no-repeat;
+            background-blend-mode: lighten;
+            font-family: 'Poppins', 'Playfair Display', serif;
+        }
+        .contact-glass {
+            background: rgba(255,255,255,0.55);
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.18);
+            max-width: 480px;
+            margin: 60px auto;
+            padding: 2.5rem 2rem 2rem 2rem;
+            animation: fadeInUp 1.2s cubic-bezier(.4,2,.6,1);
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: #d72660;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #444;
+        }
+        .form-control, .form-select {
+            border-radius: 1.5rem;
+            background: rgba(255,255,255,0.7);
+            border: none;
+            box-shadow: 0 2px 8px rgba(215,38,96,0.04);
+            font-size: 1.08rem;
+        }
+        .form-control:focus {
+            border: 1.5px solid #d72660;
+            box-shadow: 0 0 0 0.2rem #d7266033;
+        }
+        .input-group-text {
+            background: transparent;
+            border: none;
+            font-size: 1.2rem;
+            color: #d72660;
+        }
+        .btn-romantic {
+            background: linear-gradient(90deg, #fbb1b1 0%, #f9d6e5 100%);
+            color: #d72660;
+            font-weight: 700;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.7rem 2.2rem;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 16px rgba(215,38,96,0.08);
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+        .btn-romantic:hover, .btn-romantic:focus {
+            background: linear-gradient(90deg, #d72660 0%, #fbb1b1 100%);
+            color: #fff;
+            box-shadow: 0 8px 32px rgba(215,38,96,0.16);
+        }
+        .thankyou-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 2.5rem;
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.12);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            animation: fadeInUp 1.2s cubic-bezier(.4,2,.6,1);
+        }
+        .thankyou-card h2 {
+            color: #d72660;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .thankyou-card p {
+            color: #444;
+            font-size: 1.15rem;
+        }
+        @media (max-width: 600px) {
+            .contact-glass, .thankyou-card { padding: 1.2rem 0.7rem; }
+            .contact-title { font-size: 1.4rem; }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% if success is defined and success %}
+        <div class="thankyou-card mt-5">
+            <h2><i class="fa-solid fa-heart text-danger"></i> Merci pour votre message !</h2>
+            <p>Nous vous répondrons avec le cœur <span style="font-size:1.3em;">❤</span> !</p>
+        </div>
+    {% else %}
+        <div class="contact-glass shadow-lg">
+            <div class="contact-title mb-4">
+                <i class="fa-solid fa-envelope-open-text"></i> Contactez-nous
+            </div>
+            {{ form_start(form) }}
+                <div class="mb-3">
+                    <label class="form-label">Nom</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                        {{ form_widget(form.nom, {'attr': {'placeholder': 'Votre nom'}}) }}
+                    </div>
+                    {{ form_errors(form.nom) }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                        {{ form_widget(form.email, {'attr': {'placeholder': 'Votre email'}}) }}
+                    </div>
+                    {{ form_errors(form.email) }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Sujet</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-pen"></i></span>
+                        {{ form_widget(form.sujet, {'attr': {'placeholder': 'Sujet'}}) }}
+                    </div>
+                    {{ form_errors(form.sujet) }}
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Message</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fa-solid fa-message"></i></span>
+                        {{ form_widget(form.message, {'attr': {'placeholder': 'Votre message', 'rows': 4}}) }}
+                    </div>
+                    {{ form_errors(form.message) }}
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-romantic px-5">
+                        <i class="fa-solid fa-paper-plane"></i> Envoyer
+                    </button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+{% endblock %}

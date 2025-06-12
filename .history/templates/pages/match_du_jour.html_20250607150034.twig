@@ -1,0 +1,193 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Match du jour{% endblock %}
+
+{% block body %}
+<div class="container my-4">
+    <h1 class="mb-4 text-center fw-bold">Match du jour</h1>
+
+    {# Section Matchs du jour avec cards Bootstrap #}
+    <section class="matchs-du-jour mb-5">
+        <h2 class="mb-4 text-primary fw-semibold">Matchs programmés aujourd'hui</h2>
+        {% if matchsDuJour is empty %}
+            <p class="text-center text-muted fs-5">Aucun match programmé aujourd'hui.</p>
+        {% else %}
+            <div class="row g-4">
+                {% for match in matchsDuJour %}
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card shadow-sm h-100 match-card border-0 rounded-4">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="badge bg-primary rounded-pill fs-6">{{ match.date|date('H:i') }}</span>
+                                    <span class="badge bg-secondary rounded-pill fs-6">À venir</span>
+                                </div>
+                                <h5 class="card-title text-center fw-bold mb-3">
+                                    <span class="team-name">{{ match.club1.nom }}</span>
+                                    <span class="vs-text mx-2 text-muted">vs</span>
+                                    <span class="team-name">{{ match.club2.nom }}</span>
+                                </h5>
+                                <div class="d-flex justify-content-center gap-3 mt-auto">
+                                    {# Placeholder for club logos if available #}
+                                    <img src="{{ asset('assets/images/clubs/' ~ match.club1.id ~ '.png') }}" alt="{{ match.club1.nom }}" class="club-logo rounded-circle" onerror="this.style.display='none'">
+                                    <img src="{{ asset('assets/images/clubs/' ~ match.club2.id ~ '.png') }}" alt="{{ match.club2.nom }}" class="club-logo rounded-circle" onerror="this.style.display='none'">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </section>
+
+    {# Section Résultats avec filtre stylé #}
+    <section class="resultats-recents mb-5">
+        <h2 class="mb-4 text-primary fw-semibold">Résultats</h2>
+        <div class="mb-3 d-flex justify-content-start align-items-center gap-3">
+            <label for="filterResultats" class="form-label fw-semibold mb-0">Filtrer les résultats :</label>
+            <select id="filterResultats" class="form-select w-auto">
+                <option value="aujourdhui" selected>Résultats du jour</option>
+                <option value="historique">Tous les résultats</option>
+                <option value="avenir">Matchs à venir</option>
+            </select>
+        </div>
+        <ul id="resultatsList" class="list-group list-group-flush shadow-sm rounded-4 overflow-hidden">
+            {% for match in matchsResultats %}
+            <li class="list-group-item d-flex justify-content-between align-items-center result-item px-4 py-3" data-status="joue" data-date="{{ match.dateHeure|date('Y-m-d') }}">
+                    <div class="d-flex align-items-center gap-3">
+                        <strong class="fs-5">{{ match.dateHeure|date('H:i') }}</strong>
+                        <span class="fw-semibold">{{ match.club1.nom }}</span>
+                        <span class="text-muted mx-2">vs</span>
+                        <span class="fw-semibold">{{ match.club2.nom }}</span>
+                    </div>
+                    <div>
+                        <span class="badge bg-success rounded-pill fs-6">{{ match.scoreclub1 }} - {{ match.scoreclub2 }}</span>
+                    </div>
+                </li>
+            {% else %}
+                <li class="list-group-item text-center text-muted">Aucun résultat disponible.</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    {# Section Classements par poule stylisée #}
+    <section class="classements-poules mb-5 d-flex flex-column align-items-center">
+        <h2 class="mb-4 text-primary fw-semibold text-center w-100">Classements par poule</h2>
+            {% for poule, classements in poules %}
+                <div class="w-100 mb-4" style="max-width: 600px;">
+                    <div class="card shadow-sm rounded-4 border-0 classement-card">
+                        <div class="card-header bg-primary text-white rounded-top-4">
+                            <h3 class="mb-0 text-center fw-bold">Poule {{ poule }}</h3>
+                        </div>
+                        <div class="card-body p-0">
+                            <table class="table table-striped table-hover mb-0 rounded-bottom-4">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Rang</th>
+                                        <th>Club</th>
+                                        <th>J</th>
+                                        <th>G</th>
+                                        <th>N</th>
+                                        <th>P</th>
+                                        <th>BM</th>
+                                        <th>BE</th>
+                                        <th>PTS</th>
+                                        <th>G/A</th>
+                                        <th>CJ</th>
+                                        <th>CR</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for classement in classements %}
+                                        <tr>
+                                            <td>{{ classement.rang }}</td>
+                                            <td>{{ classement.club.nom }}</td>
+                                            <td>{{ classement.matchsjouer }}</td>
+                                            <td>{{ classement.gagnes }}</td>
+                                            <td>{{ classement.nuls }}</td>
+                                            <td>{{ classement.perdus }}</td>
+                                            <td>{{ classement.butsPour }}</td>
+                                            <td>{{ classement.butscontre }}</td>
+                                            <td>{{ classement.points }}</td>
+                                            <td>{{ classement.goalaverage }}</td>
+                                            <td>{{ classement.cartonsJaunes }}</td>
+                                            <td>{{ classement.cartonsRouges }}</td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="12" class="text-center">Aucun classement disponible</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+    </section>
+</div>
+
+{# Script JS pour filtrer les résultats #}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterSelect = document.getElementById('filterResultats');
+        const resultatsList = document.getElementById('resultatsList');
+        const items = resultatsList.querySelectorAll('.result-item');
+
+        filterSelect.addEventListener('change', function() {
+            const filter = this.value;
+            items.forEach(item => {
+                const status = item.getAttribute('data-status');
+                if (filter === 'aujourdhui') {
+                    // Afficher uniquement les matchs joués aujourd'hui
+                    item.style.display = (status === 'joue') ? '' : 'none';
+                } else if (filter === 'historique') {
+                    // Afficher tous les matchs
+                    item.style.display = '';
+                } else if (filter === 'avenir') {
+                    // Afficher uniquement les matchs à venir
+                    item.style.display = (status === 'avenir') ? '' : 'none';
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    /* Styles personnalisés pour la page Match du jour */
+
+    /* Cards matchs */
+    .match-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        background: #ffffff;
+    }
+    .match-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+    .team-name {
+        font-size: 1.25rem;
+        color: #0d6efd;
+    }
+    .vs-text {
+        font-weight: 600;
+    }
+    .club-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border: 2px solid #0d6efd;
+        background: #fff;
+    }
+
+    /* Résultats */
+    .result-item {
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        cursor: pointer;
+    }
+    .result-item:hover {
+        background-color: rgba(13, 110, 253, 0.1);
+        transform: scale(1.02);
+    }
+</style>
+{% endblock %}

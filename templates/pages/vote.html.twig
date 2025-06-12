@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vote{% endblock %}
+
+{% block body %}
+<h1>Votes</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Club</th>
+            <th>Nombre de votes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in votesStats %}
+        <tr>
+            <td>{{ stat.club.nom }}</td>
+            <td>{{ stat.totalVotes }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

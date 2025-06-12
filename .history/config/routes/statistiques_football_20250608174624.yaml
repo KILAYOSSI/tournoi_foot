@@ -1,0 +1,3 @@
+statistiques_football:
+    path: /statistiques-football
+    controller: App\Controller\StatistiquesController::footballStats

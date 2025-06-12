@@ -1,0 +1,3 @@
+calendrier:
+    path: /calendrier
+    controller: App\Controller\CalendrierController::index

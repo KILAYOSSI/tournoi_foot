@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Calendrier des matchs - Export PDF</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #b71c1c;
+            color: white;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            font-weight: bold;
+            font-size: 24px;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #fff;
+        }
+        .match-list {
+            width: 90%;
+            margin: 20px auto;
+        }
+        .match-item {
+            background: #fff;
+            color: #000;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        .team img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            padding: 2px;
+            object-fit: contain;
+        }
+        .score {
+            background: #212121;
+            padding: 5px 20px;
+            border-radius: 30px;
+            font-weight: 900;
+            font-size: 18px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+        }
+        .section-title {
+            text-align: center;
+            font-weight: 700;
+            font-size: 20px;
+            margin: 30px 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Calendrier des matchs - Export PDF</div>
+
+    <div class="section-title">Matchs à venir</div>
+    <div class="match-list">
+        {% if matchsAVenir is empty %}
+            <p style="text-align:center; color: white;">Aucun match à venir.</p>
+        {% else %}
+            {% for match in matchsAVenir %}
+                <div class="match-item">
+                    <div class="team">
+                        <img src="{{ asset('uploads/logos/' ~ match.club1.logo) }}" alt="{{ match.club1.nom }}" />
+                        {{ match.club1.nom }}
+                    </div>
+                    <div class="score">VS</div>
+                    <div class="team">
+                        {{ match.club2.nom }}
+                        <img src="{{ asset('uploads/logos/' ~ match.club2.logo) }}" alt="{{ match.club2.nom }}" />
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="section-title">Résultats du jour</div>
+    <div class="match-list">
+        {% if matchsResultats is empty %}
+            <p style="text-align:center; color: white;">Aucun résultat disponible.</p>
+        {% else %}
+            {% for match in matchsResultats %}
+                <div class="match-item">
+                    <div class="team">
+                        <img src="{{ asset('uploads/logos/' ~ match.club1.logo) }}" alt="{{ match.club1.nom }}" />
+                        {{ match.club1.nom }}
+                    </div>
+                    <div class="score">{{ match.scoreclub1 }} - {{ match.scoreclub2 }}</div>
+                    <div class="team">
+                        {{ match.club2.nom }}
+                        <img src="{{ asset('uploads/logos/' ~ match.club2.logo) }}" alt="{{ match.club2.nom }}" />
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,3 @@
+vote:
+    path: /vote
+    controller: App\Controller\VoteController::index

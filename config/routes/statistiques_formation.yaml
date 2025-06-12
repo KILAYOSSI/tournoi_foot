@@ -1,0 +1,5 @@
+# Fichier de routes pour les statistiques de formation
+
+statistiques_formation_index:
+    path: /statistiques-formation
+    controller: App\Controller\StatistiquesFormationController::index

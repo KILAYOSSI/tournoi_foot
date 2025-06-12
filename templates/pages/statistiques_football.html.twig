@@ -1,0 +1,264 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques Football{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #e0e0e0;
+            font-family: 'Poppins', sans-serif;
+        }
+        h1, h2 {
+            color: #00bfa5;
+            text-shadow: 0 0 5px #00796b;
+        }
+        .table thead th {
+            background: #1a2a4a;
+            color: #00ffc8;
+            border: none;
+        }
+        .table tbody tr {
+            background: #16213e;
+            transition: background-color 0.3s ease;
+        }
+        .table tbody tr:hover {
+            background-color: #00ffc8;
+            color: #0f3460;
+            cursor: pointer;
+        }
+        .icon-soccer-ball {
+            color: #00ffc8;
+            margin-right: 0.5rem;
+        }
+        .chart-container {
+            position: relative;
+            height: 500px;
+            margin-top: 2rem;
+            background: #1a2a4a;
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 0 20px #00ffc8;
+        }
+        .filter-select {
+            max-width: 300px;
+            margin-bottom: 1rem;
+        }
+        .dark-mode {
+            background: #121212;
+            color: #e0e0e0;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h1 class="text-center mb-4"><i class="fas fa-trophy icon-soccer-ball"></i> Statistiques du Tournoi</h1>
+
+    <h2>Tableau des Meilleurs Buteurs</h2>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Club</th>
+                <th>Buts</th>
+                <th>Matchs Joués</th>
+                <th>Ratio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for joueur in meilleursButeurs %}
+            <tr>
+                <td>{{ joueur.nom }}</td>
+                <td>{{ joueur.club }}</td>
+                <td>{{ joueur.buts }}</td>
+                <td>{{ joueur.matchs }}</td>
+                <td>{{ joueur.ratio is defined ? joueur.ratio|number_format(2) : 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Tableau des Meilleurs Passeurs</h2>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Club</th>
+                <th>Passes D.</th>
+                <th>Matchs</th>
+                <th>Minutes Jouées</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for joueur in meilleursPasseurs %}
+            <tr>
+                <td>{{ joueur.nom }}</td>
+                <td>{{ joueur.club }}</td>
+                <td>{{ joueur.passes }}</td>
+                <td>{{ joueur.matchs }}</td>
+                <td>{{ joueur.minutes is defined ? joueur.minutes : 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Meilleur Gardien</h2>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Club</th>
+                <th>Clean Sheets</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for gardien in meilleursGardiens %}
+            <tr>
+                <td>{{ gardien.nom }}</td>
+                <td>{{ gardien.club }}</td>
+                <td>{{ gardien.cleanSheets }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Meilleur Joueur Global</h2>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Club</th>
+                <th>Goals + Assists</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for joueur in meilleurJoueurGlobal %}
+            <tr>
+                <td>{{ joueur.nom }}</td>
+                <td>{{ joueur.club }}</td>
+                <td>{{ joueur.goalsAssists }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="chart-container">
+        <h2>Évolution des Performances</h2>
+        <select id="playerFilter" class="form-select filter-select" aria-label="Filtrer par joueur">
+            <option value="all" selected>Tous les joueurs</option>
+            {% for joueur in joueurs %}
+                <option value="{{ joueur.id }}">{{ joueur.nom }}</option>
+            {% endfor %}
+        </select>
+        <canvas id="performanceChart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    let chart;
+
+    const data = {
+        labels: [], // Dates ou journées de match
+        datasets: [
+            {
+                label: 'Buts',
+                data: [],
+                borderColor: '#00ffc8',
+                backgroundColor: 'rgba(0, 255, 200, 0.2)',
+                fill: true,
+                tension: 0.4,
+            },
+            {
+                label: 'Passes',
+                data: [],
+                borderColor: '#ffcc00',
+                backgroundColor: 'rgba(255, 204, 0, 0.2)',
+                fill: true,
+                tension: 0.4,
+            },
+            {
+                label: 'Arrêts',
+                data: [],
+                borderColor: '#ff4444',
+                backgroundColor: 'rgba(255, 68, 68, 0.2)',
+                fill: true,
+                tension: 0.4,
+            }
+        ]
+    };
+
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: true,
+            interaction: {
+                mode: 'nearest',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#e0e0e0'
+                    }
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#e0e0e0' },
+                    grid: { color: '#444' }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: '#e0e0e0' },
+                    grid: { color: '#444' }
+                }
+            }
+        }
+    };
+
+    function updateChart(playerId) {
+        // Simule des données aléatoires pour la démonstration
+        const labels = ['Match 1', 'Match 2', 'Match 3', 'Match 4', 'Match 5'];
+        const buts = [];
+        const passes = [];
+        const arrets = [];
+        for (let i = 0; i < labels.length; i++) {
+            buts.push(Math.floor(Math.random() * 3));
+            passes.push(Math.floor(Math.random() * 5));
+            arrets.push(Math.floor(Math.random() * 4));
+        }
+        chart.data.labels = labels;
+        chart.data.datasets[0].data = buts;
+        chart.data.datasets[1].data = passes;
+        chart.data.datasets[2].data = arrets;
+        chart.update();
+    }
+
+    window.onload = function() {
+        chart = new Chart(ctx, config);
+        updateChart('all');
+
+        document.getElementById('playerFilter').addEventListener('change', function() {
+            updateChart(this.value);
+        });
+    };
+</script>
+{% endblock %}

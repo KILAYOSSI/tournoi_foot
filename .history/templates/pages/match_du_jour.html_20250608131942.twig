@@ -1,0 +1,169 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Match du Jour{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Poppins', 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .match-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .match-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .team-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .team-logo:hover {
+            transform: scale(1.1);
+        }
+        .filter-btns .btn.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .fade {
+            transition: opacity 0.5s ease;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h1 class="mb-4">Matchs du jour</h1>
+
+    <section id="matchs-a-venir" class="mb-5">
+        <h2 class="mb-3">Matchs à venir aujourd’hui</h2>
+        <div class="row g-3">
+            {% for match in matchsDuJour %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card match-card p-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <img src="{{ asset('images/teams/' ~ match.equipe1.logo) }}" alt="{{ match.equipe1.nom }}" class="team-logo me-3" />
+                            <strong>{{ match.equipe1.nom }}</strong>
+                        </div>
+                        <div class="text-center">
+                            <i class="fa-regular fa-clock"></i> {{ match.date|date('H:i') }}
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <strong>{{ match.equipe2.nom }}</strong>
+                            <img src="{{ asset('images/teams/' ~ match.equipe2.logo) }}" alt="{{ match.equipe2.nom }}" class="team-logo ms-3" />
+                        </div>
+                    </div>
+                    {% if match.stade is defined and match.stade %}
+                    <div class="mt-2 text-center text-muted">
+                        <i class="fa-solid fa-location-dot"></i> {{ match.stade }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <p>Aucun match à venir aujourd’hui.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="resultats">
+        <h2 class="mb-3">Résultats</h2>
+        <div class="filter-btns mb-3">
+            <button id="btn-jour" class="btn btn-outline-primary active">Résultats du jour</button>
+            <button id="btn-tous" class="btn btn-outline-primary">Tous les résultats</button>
+        </div>
+        <div id="resultats-jour" class="fade show">
+            {% set hasResult = false %}
+            {% for rencontre in matchsResultats %}
+                {% if rencontre.dateHeure|date('Y-m-d') == "now"|date('Y-m-d') %}
+                {% set hasResult = true %}
+                <div class="card match-card p-3 mb-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <img src="{{ asset('images/teams/' ~ rencontre.club1.logo) }}" alt="{{ rencontre.club1.nom }}" class="team-logo me-3" />
+                            <strong>{{ rencontre.club1.nom }}</strong>
+                        </div>
+                        <div class="text-center">
+                            <i class="fa-regular fa-clock"></i> {{ rencontre.dateHeure|date('H:i') }}
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <strong>{{ rencontre.club2.nom }}</strong>
+                            <img src="{{ asset('images/teams/' ~ rencontre.club2.logo) }}" alt="{{ rencontre.club2.nom }}" class="team-logo ms-3" />
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center fw-bold">
+                        {{ rencontre.scoreclub1 }} - {{ rencontre.scoreclub2 }}
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+            {% if not hasResult %}
+                <p>Aucun résultat du jour.</p>
+            {% endif %}
+        </div>
+        <div id="resultats-tous" class="fade" style="display:none;">
+            {% for rencontre in matchsResultats %}
+            <div class="card match-card p-3 mb-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <img src="{{ asset('images/teams/' ~ rencontre.club1.logo) }}" alt="{{ rencontre.club1.nom }}" class="team-logo me-3" />
+                        <strong>{{ rencontre.club1.nom }}</strong>
+                    </div>
+                    <div class="text-center">
+                        <i class="fa-regular fa-clock"></i> {{ rencontre.dateHeure|date('d/m/Y H:i') }}
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <strong>{{ rencontre.club2.nom }}</strong>
+                        <img src="{{ asset('images/teams/' ~ rencontre.club2.logo) }}" alt="{{ rencontre.club2.nom }}" class="team-logo ms-3" />
+                    </div>
+                </div>
+                <div class="mt-2 text-center fw-bold">
+                    {{ rencontre.scoreclub1 }} - {{ rencontre.scoreclub2 }}
+                </div>
+            </div>
+            {% else %}
+            <p>Aucun résultat disponible.</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{# JavaScript en dehors du block body #}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnJour = document.getElementById('btn-jour');
+            const btnTous = document.getElementById('btn-tous');
+            const resultatsJour = document.getElementById('resultats-jour');
+            const resultatsTous = document.getElementById('resultats-tous');
+
+            btnJour.addEventListener('click', function () {
+                btnJour.classList.add('active');
+                btnTous.classList.remove('active');
+                resultatsJour.style.display = 'block';
+                resultatsTous.style.display = 'none';
+                resultatsJour.classList.add('fade');
+                resultatsTous.classList.remove('fade');
+            });
+
+            btnTous.addEventListener('click', function () {
+                btnTous.classList.add('active');
+                btnJour.classList.remove('active');
+                resultatsTous.style.display = 'block';
+                resultatsJour.style.display = 'none';
+                resultatsTous.classList.add('fade');
+                resultatsJour.classList.remove('fade');
+            });
+        });
+    </script>
+{% endblock %}

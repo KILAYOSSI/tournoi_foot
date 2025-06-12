@@ -1,0 +1,40 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Gestion des Matchs{% endblock %}
+
+{% block body %}
+<h1>Liste des Matchs</h1>
+
+<a href="{{ path('admin_matchs_new') }}" class="btn btn-primary mb-3">Ajouter un match</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Équipe Domicile</th>
+            <th>Équipe Extérieure</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for match in matchs %}
+            <tr>
+                <td>{{ match.club1.nom }}</td>
+                <td>{{ match.club2.nom }}</td>
+                <td>{{ match.date|date('d/m/Y H:i') }}</td>
+                <td>
+                    <a href="{{ path('admin_matchs_edit', {'id': match.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+                    <form method="post" action="{{ path('admin_matchs_delete', {'id': match.id}) }}" style="display:inline-block;" onsubmit="return confirm('Voulez-vous vraiment supprimer ce match ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ match.id) }}">
+                        <button class="btn btn-sm btn-danger">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun match trouvé.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

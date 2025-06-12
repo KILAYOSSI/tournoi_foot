@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Match du Jour{% endblock %}
+
+{% block body %}
+<h1>Match du Jour</h1>
+
+<h2>Matchs à venir aujourd'hui</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Équipe 1</th>
+            <th>Équipe 2</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for match in matchsDuJour %}
+            <tr>
+                <td>{{ match.equipe1.nom }}</td>
+                <td>{{ match.equipe2.nom }}</td>
+                <td>{{ match.date|date('d/m/Y H:i') }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun match à venir aujourd'hui.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Résultats récents</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Équipe 1</th>
+            <th>Équipe 2</th>
+            <th>Score</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rencontre in matchsResultats %}
+            <tr>
+                <td>{{ rencontre.equipe1.nom }}</td>
+                <td>{{ rencontre.equipe2.nom }}</td>
+                <td>{{ rencontre.score }}</td>
+                <td>{{ rencontre.dateHeure|date('d/m/Y H:i') }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun résultat récent.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block body %}
+<h1>Liste des statistiques</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Joueur</th>
+            <th>Buts</th>
+            <th>Passes</th>
+            <th>Cartons Jaunes</th>
+            <th>Cartons Rouges</th>
+            <th>Commentaire</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for statistique in statistiques %}
+            <tr>
+                <td>{{ statistique.joueur.nom }}</td>
+                <td>{{ statistique.buts }}</td>
+                <td>{{ statistique.passes }}</td>
+                <td>{{ statistique.cartonsjaunes }}</td>
+                <td>{{ statistique.cartonsrouges }}</td>
+                <td>{{ statistique.commentaire }}</td>
+                <td>
+                    <a href="{{ path('admin_statistiques_edit', {'id': statistique.id}) }}">Modifier</a>
+                    <form method="post" action="{{ path('admin_statistiques_delete', {'id': statistique.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cette statistique ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ statistique.id) }}">
+                        <button type="submit">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucune statistique trouvée</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('admin_statistiques_new') }}">Ajouter une statistique</a>
+{% endblock %}

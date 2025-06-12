@@ -1,0 +1,3 @@
+match_du_jour:
+    path: /match-du-jour/
+    controller: App\Controller\MatchController::matchDuJour

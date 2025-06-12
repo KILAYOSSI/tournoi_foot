@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h1 class="text-center mb-5 fw-bold">Statistiques des joueurs</h1>
+
+    <div class="row g-4">
+
+        {# Meilleurs buteurs #}
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card shadow-sm rounded-4 border-0 h-100">
+                <div class="card-header bg-warning text-dark text-center rounded-top-4">
+                    <h3 class="mb-0 fw-bold">🏆 Meilleurs buteurs</h3>
+                </div>
+                <div class="card-body">
+                    <ol class="list-group list-group-numbered">
+                        {% for stat in topScorers %}
+                            <li class="list-group-item d-flex align-items-center gap-3">
+                                {% if stat.joueur is not null %}
+                                    <img src="{{ asset('assets/images/joueurs/' ~ stat.joueur.id ~ '.jpg') }}" alt="{{ stat.joueur.nom }}" class="rounded-circle joueur-photo" onerror="this.style.display='none'">
+                                    <div class="flex-grow-1">
+                                        <strong>{{ stat.joueur.nom }}</strong><br>
+                                        <small class="text-muted">{% if stat.joueur.club is not null %}{{ stat.joueur.club.nom }}{% else %}N/A{% endif %}</small>
+                                    </div>
+                                {% else %}
+                                    <img src="{{ asset('assets/images/joueurs/default.jpg') }}" alt="Joueur inconnu" class="rounded-circle joueur-photo" onerror="this.style.display='none'">
+                                    <div class="flex-grow-1">
+                                        <strong>Joueur inconnu</strong><br>
+                                        <small class="text-muted">N/A</small>
+                                    </div>
+                                {% endif %}
+                                <span class="badge bg-warning text-dark rounded-pill fs-6">{{ stat.totalButs }} buts</span>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        {# Meilleurs passeurs #}
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card shadow-sm rounded-4 border-0 h-100">
+                <div class="card-header bg-info text-white text-center rounded-top-4">
+                    <h3 class="mb-0 fw-bold">🎯 Meilleurs passeurs</h3>
+                </div>
+                <div class="card-body">
+                    <ol class="list-group list-group-numbered">
+                        {% for stat in topAssisters %}
+                            <li class="list-group-item d-flex align-items-center gap-3">
+                                {% if stat.joueur is not null %}
+                                    <img src="{{ asset('assets/images/joueurs/' ~ stat.joueur.id ~ '.jpg') }}" alt="{{ stat.joueur.nom }}" class="rounded-circle joueur-photo" onerror="this.style.display='none'">
+                                    <div class="flex-grow-1">
+                                        <strong>{{ stat.joueur.nom }}</strong><br>
+                                        <small class="text-muted">{% if stat.joueur.club is not null %}{{ stat.joueur.club.nom }}{% else %}N/A{% endif %}</small>
+                                    </div>
+                                {% else %}
+                                    <img src="{{ asset('assets/images/joueurs/default.jpg') }}" alt="Joueur inconnu" class="rounded-circle joueur-photo" onerror="this.style.display='none'">
+                                    <div class="flex-grow-1">
+                                        <strong>Joueur inconnu</strong><br>
+                                        <small class="text-muted">N/A</small>
+                                    </div>
+                                {% endif %}
+                                <span class="badge bg-info rounded-pill fs-6">{{ stat.totalPasses }} passes</span>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        {# Meilleur G/A (buts + passes) #}
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card shadow-sm rounded-4 border-0 h-100">
+                <div class="card-header bg-success text-white text-center rounded-top-4">
+                    <h3 class="mb-0 fw-bold">⚡ Meilleur G/A (buts + passes)</h3>
+                </div>
+                <div class="card-body">
+                    <ol class="list-group list-group-numbered">
+                        {% for stat in topGoalAssists %}
+                            <li class="list-group-item d-flex align-items-center gap-3">
+                                {% if stat.joueur is not null %}
+                                    <img src="{{ asset('assets/images/joueurs/' ~ stat.joueur.id ~ '.jpg') }}" alt="{{ stat.joueur.nom }}" class="rounded-circle joueur-photo" onerror="this.style.display='none'">
+                                    <div class="flex-grow-1">
+                                        <strong>{{ stat.joueur.nom }}</strong><br>
+                                        <small class="text-muted">{% if stat.joueur.club is not null %}{{ stat.joueur.club.nom }}{% else %}N/A{% endif %}</small>
+                                    </div>
+                                {% else %}
+                                    <img src="{{ asset('assets/images/joueurs/default.jpg') }}" alt="Joueur inconnu" class="rounded-circle joueur-photo" onerror="this.style.display='none'">
+                                    <div class="flex-grow-1">
+                                        <strong>Joueur inconnu</strong><br>
+                                        <small class="text-muted">N/A</small>
+                                    </div>
+                                {% endif %}
+                                <span class="badge bg-success rounded-pill fs-6">{{ stat.goalsAssists }} G/A</span>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        {# Meilleurs gardiens (clean sheets) #}
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="card shadow-sm rounded-4 border-0 h-100">
+                <div class="card-header bg-secondary text-white text-center rounded-top-4">
+                    <h3 class="mb-0 fw-bold">🧤 Meilleurs gardiens (clean sheets)</h3>
+                </div>
+                <div class="card-body d-flex align-items-center justify-content-center">
+                    <p class="text-muted mb-0">Les données sur les clean sheets ne sont pas disponibles actuellement.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .joueur-photo {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border: 2px solid #ddd;
+    }
+    .card-header h3 {
+        font-weight: 700;
+        letter-spacing: 0.05em;
+    }
+    ol.list-group-numbered {
+        padding-left: 0;
+    }
+    ol.list-group-numbered > li {
+        border: none;
+        padding-left: 0;
+    }
+</style>
+{% endblock %}

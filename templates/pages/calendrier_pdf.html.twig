@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Calendrier des matchs - Export PDF</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #212529;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            font-weight: bold;
+            font-size: 24px;
+            letter-spacing: 2px;
+            color: #343a40;
+            border-bottom: 2px solid #dee2e6;
+        }
+        .match-list {
+            width: 90%;
+            margin: 20px auto;
+        }
+        .match-item {
+            background: #ffffff;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            color: #212529;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .score {
+            background: #007bff;
+            padding: 5px 20px;
+            border-radius: 30px;
+            font-weight: 900;
+            font-size: 18px;
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        .section-title {
+            text-align: center;
+            font-weight: 700;
+            font-size: 20px;
+            margin: 30px 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #343a40;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Calendrier des matchs - Export PDF</div>
+
+    <div class="section-title">Matchs à venir</div>
+    <div class="match-list">
+        {% if matchsAVenir is empty %}
+            <p style="text-align:center;">Aucun match à venir.</p>
+        {% else %}
+            {% for match in matchsAVenir %}
+                <div class="match-item">
+                    <div class="team">
+                        {{ match.club1.nom }}
+                    </div>
+                    <div class="score">VS</div>
+                    <div class="team">
+                        {{ match.club2.nom }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="section-title">Résultats du jour</div>
+    <div class="match-list">
+        {% if matchsResultats is empty %}
+            <p style="text-align:center;">Aucun résultat disponible.</p>
+        {% else %}
+            {% for match in matchsResultats %}
+                <div class="match-item">
+                    <div class="team">
+                        {{ match.club1.nom }}
+                    </div>
+                    <div class="score">{{ match.scoreclub1 }} - {{ match.scoreclub2 }}</div>
+                    <div class="team">
+                        {{ match.club2.nom }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>

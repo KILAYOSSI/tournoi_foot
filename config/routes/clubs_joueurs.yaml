@@ -1,0 +1,3 @@
+clubs_joueurs:
+    path: /clubs-joueurs
+    controller: App\Controller\ClubsJoueursController::index

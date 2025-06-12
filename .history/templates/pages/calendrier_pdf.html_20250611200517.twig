@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Export PDF - Calendrier des matchs</title>
+    <style>
+        /* Bootstrap-like styles for PDF */
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 12px;
+            color: #212529;
+            background-color: #f8f9fa;
+            margin: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+        .section {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        .match-item, .result-item {
+            background-color: #e9ecef;
+            border-radius: 0.375rem;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.075);
+        }
+        .match-date {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+        .clubs {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: #212529;
+        }
+        .club-name {
+            text-transform: uppercase;
+            color: #0d6efd;
+        }
+        .score {
+            font-weight: 700;
+            font-size: 16px;
+            color: #198754;
+        }
+        .vs-text {
+            font-weight: 700;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calendrier des matchs - Export PDF</h1>
+
+    <div class="section">
+        <h2>Matchs à venir</h2>
+        {% if matchsAVenir is empty %}
+            <p>Aucun match à venir.</p>
+        {% else %}
+            {% for match in matchsAVenir %}
+                <div class="match-item">
+                    <div class="match-date">{{ match.date|date('l j F Y H:i') }}</div>
+                    <div class="clubs">
+                        <div class="club-name">{{ match.club1.nom|upper }}</div>
+                        <div class="vs-text">VS</div>
+                        <div class="club-name">{{ match.club2.nom|upper }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h2>Résultats du jour</h2>
+        {% if matchsResultats is empty %}
+            <p>Aucun résultat disponible.</p>
+        {% else %}
+            {% for match in matchsResultats %}
+                <div class="result-item">
+                    <div class="clubs">
+                        <div class="club-name">{{ match.club1.nom|upper }}</div>
+                        <div class="score">{{ match.scoreclub1 }} - {{ match.scoreclub2 }}</div>
+                        <div class="club-name">{{ match.club2.nom|upper }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>

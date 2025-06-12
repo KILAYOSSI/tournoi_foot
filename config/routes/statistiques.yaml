@@ -1,0 +1,3 @@
+statistiques:
+    path: /statistiques
+    controller: App\Controller\StatistiquesController::index

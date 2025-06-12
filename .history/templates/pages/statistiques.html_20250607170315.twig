@@ -1,0 +1,190 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques - Tournoi de Football Inter-Village{% endblock %}
+
+{% block body %}
+<div class="container my-5 bg-dark text-white rounded-4 p-4">
+    <h1 class="mb-4 text-center fw-bold text-light">Football Stats</h1>
+
+    <div class="row g-4">
+        <!-- Classement général des clubs -->
+        <section class="col-12 mb-4">
+            <div class="bg-secondary rounded-4 p-3">
+                <h2 class="text-light fw-semibold mb-3">Classement Général</h2>
+                <table class="table table-dark table-striped table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Équipe</th>
+                            <th>P</th>
+                            <th>W</th>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>PTS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for classement in classements %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ classement.club.nom }}</td>
+                            <td>{{ classement.matchsjouer }}</td>
+                            <td>{{ classement.gagnes }}</td>
+                            <td>{{ classement.nuls }}</td>
+                            <td>{{ classement.perdus }}</td>
+                            <td>{{ classement.points }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center text-muted">Aucun classement disponible</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Top Buteurs -->
+        <section class="col-12 col-md-6">
+            <div class="bg-secondary rounded-4 p-3 h-100">
+                <h3 class="text-light fw-semibold mb-3">Top Buteurs</h3>
+                <ul class="list-group list-group-flush">
+                    {% for stat in topScorers %}
+                    <li class="list-group-item d-flex align-items-center gap-3 bg-dark text-white rounded-3 mb-2">
+                        <span class="badge bg-warning text-dark fs-5 rounded-pill me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-weight: 700;">{{ loop.index }}</span>
+                        <div class="flex-grow-1">
+                            <strong class="fs-5">{{ stat.joueur.nom }}</strong><br>
+                            <small>Buts : {{ stat.totalButs }}</small>
+                        </div>
+                        <i class="fa fa-trophy text-warning fs-4 ms-auto" title="Meilleur Buteur"></i>
+                    </li>
+                    {% else %}
+                    <li class="list-group-item text-center text-muted bg-dark rounded-3">Aucun buteur disponible.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <!-- Top Passeurs -->
+        <section class="col-12 col-md-6">
+            <div class="bg-secondary rounded-4 p-3 h-100">
+                <h3 class="text-light fw-semibold mb-3">Top Passeurs</h3>
+                <ul class="list-group list-group-flush">
+                    {% for stat in topAssisters %}
+                    <li class="list-group-item d-flex align-items-center gap-3 bg-dark text-white rounded-3 mb-2">
+                        <span class="badge bg-info text-white fs-5 rounded-pill me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-weight: 700;">{{ loop.index }}</span>
+                        <div class="flex-grow-1">
+                            <strong class="fs-5">{{ stat.joueur.nom }}</strong><br>
+                            <small>Passes : {{ stat.totalPasses }}</small>
+                        </div>
+                        <i class="fa fa-trophy text-info fs-4 ms-auto" title="Meilleur Passeur"></i>
+                    </li>
+                    {% else %}
+                    <li class="list-group-item text-center text-muted bg-dark rounded-3">Aucun passeur disponible.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <!-- Top Buteurs + Passeurs -->
+        <section class="col-12 col-md-6">
+            <div class="bg-secondary rounded-4 p-3 h-100">
+                <h3 class="text-light fw-semibold mb-3">Top Buteurs + Passeurs (G/A)</h3>
+                <ul class="list-group list-group-flush">
+                    {% for stat in topGoalAssists %}
+                    <li class="list-group-item d-flex align-items-center gap-3 bg-dark text-white rounded-3 mb-2">
+                        <span class="badge bg-success text-white fs-5 rounded-pill me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-weight: 700;">{{ loop.index }}</span>
+                        <div class="flex-grow-1">
+                            <strong class="fs-5">{{ stat.joueur.nom }}</strong><br>
+                            <small>G/A : {{ stat.goalsAssists }}</small>
+                        </div>
+                        <i class="fa fa-trophy text-success fs-4 ms-auto" title="Meilleur Buteur + Passeur"></i>
+                    </li>
+                    {% else %}
+                    <li class="list-group-item text-center text-muted bg-dark rounded-3">Aucun joueur disponible.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <!-- Meilleurs Gardiens -->
+        <section class="col-12 col-md-6">
+            <div class="bg-secondary rounded-4 p-3 h-100">
+                <h3 class="text-light fw-semibold mb-3">Meilleurs Gardiens (Clean Sheets)</h3>
+                <ul class="list-group list-group-flush">
+                    {% for stat in topCleanSheets %}
+                    <li class="list-group-item d-flex align-items-center gap-3 bg-dark text-white rounded-3 mb-2">
+                        <span class="badge bg-primary text-white fs-5 rounded-pill me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-weight: 700;">{{ loop.index }}</span>
+                        <div class="flex-grow-1">
+                            <strong class="fs-5">{{ stat.joueur.nom }}</strong><br>
+                            <small>Clean Sheets : {{ stat.cleanSheets }}</small>
+                        </div>
+                        <i class="fa fa-trophy text-primary fs-4 ms-auto" title="Meilleur Gardien"></i>
+                    </li>
+                    {% else %}
+                    <li class="list-group-item text-center text-muted bg-dark rounded-3">Aucun gardien disponible.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Graphiques dynamiques -->
+    <div class="row mt-5">
+        <section class="col-12">
+            <div class="card shadow-sm rounded-4 p-4 bg-secondary">
+                <h2 class="mb-4 text-primary fw-semibold">Graphiques de performance</h2>
+                <canvas id="performanceChart" style="width: 100%; height: 400px;"></canvas>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    const performanceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [{% for stat in topScorers %}'{{ stat.joueur.nom }}'{% if not loop.last %}, {% endif %}{% endfor %}],
+            datasets: [{
+                label: 'Buts',
+                data: [{% for stat in topScorers %}{{ stat.totalButs }}{% if not loop.last %}, {% endif %}{% endfor %}],
+                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                fill: true,
+                tension: 0.3
+            }, {
+                label: 'Passes',
+                data: [{% for stat in topAssisters %}{{ stat.totalPasses }}{% if not loop.last %}, {% endif %}{% endfor %}],
+                borderColor: 'rgba(255, 206, 86, 1)',
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            stacked: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Performances des joueurs (Buts et Passes)'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    precision: 0
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}

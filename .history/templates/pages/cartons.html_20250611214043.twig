@@ -1,0 +1,264 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cartons - Tournoi de Football{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,400|Poppins:400,600|Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(120deg, #f8e1f4 0%, #e3f0ff 100%);
+            background-size: cover;
+            font-family: 'Poppins', 'Playfair Display', 'Great Vibes', cursive;
+        }
+        .cartons-glass {
+            background: rgba(255,255,255,0.65);
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.18);
+            max-width: 900px;
+            margin: 60px auto 30px auto;
+            padding: 2.5rem 2rem 2rem 2rem;
+            animation: fadeInUp 1.2s cubic-bezier(.4,2,.6,1);
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+        .cartons-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: #d72660;
+            text-align: center;
+            margin-bottom: 0.7rem;
+            letter-spacing: 1px;
+        }
+        .cartons-poetic {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            color: #b85c8e;
+            text-align: center;
+            margin-bottom: 2.2rem;
+            letter-spacing: 1px;
+        }
+        .table-romantic th, .table-romantic td {
+            vertical-align: middle;
+            text-align: center;
+            font-size: 1.13rem;
+        }
+        .table-romantic th {
+            background: #f8fafc;
+            font-weight: 700;
+            color: #d72660;
+            letter-spacing: 1px;
+            border-top: none;
+        }
+        .table-romantic tbody tr {
+            transition: background 0.18s, transform 0.18s;
+        }
+        .table-romantic tbody tr:hover {
+            background: #fff0f6;
+            transform: scale(1.012);
+            z-index: 2;
+            position: relative;
+            box-shadow: 0 4px 16px #d7266022;
+        }
+        .icon-jaune {
+            color: #ffc107;
+            font-size: 1.5em;
+            animation: blink-jaune 1.2s infinite alternate;
+        }
+        @keyframes blink-jaune {
+            0% { filter: brightness(1.1);}
+            100% { filter: brightness(1.7);}
+        }
+        .icon-rouge {
+            color: #dc3545;
+            font-size: 1.5em;
+            animation: blink-rouge 1.2s infinite alternate;
+        }
+        @keyframes blink-rouge {
+            0% { filter: brightness(1);}
+            100% { filter: brightness(1.5);}
+        }
+        .btn-romantic {
+            background: linear-gradient(90deg, #fbb1b1 0%, #f9d6e5 100%);
+            color: #d72660;
+            font-weight: 700;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.7rem 2.2rem;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 16px rgba(215,38,96,0.08);
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+        .btn-romantic:hover, .btn-romantic:focus {
+            background: linear-gradient(90deg, #d72660 0%, #fbb1b1 100%);
+            color: #fff;
+            box-shadow: 0 8px 32px rgba(215,38,96,0.16);
+        }
+        .filter-bar {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        @media (max-width: 600px) {
+            .cartons-glass { padding: 1.2rem 0.7rem; }
+            .cartons-title { font-size: 1.4rem; }
+            .cartons-poetic { font-size: 1.1rem; }
+            .table-romantic th, .table-romantic td { font-size: 0.95rem; }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="cartons-glass shadow-lg">
+        <div class="cartons-title mb-2">
+            <i class="fa-solid fa-square-exclamation"></i> Cartons du tournoi
+        </div>
+        <div class="cartons-poetic mb-4">
+            Chaque carton raconte une émotion du match... <span style="color:#d72660;">&#10084;</span>
+        </div>
+
+        <div class="filter-bar">
+            <input type="text" id="filter-joueur" class="form-control" style="max-width:180px;" placeholder="Filtrer joueur...">
+            <input type="text" id="filter-club" class="form-control" style="max-width:180px;" placeholder="Filtrer club...">
+            <select id="filter-type" class="form-select" style="max-width:160px;">
+                <option value="">Tous types</option>
+                <option value="jaune">Carton jaune</option>
+                <option value="rouge">Carton rouge</option>
+            </select>
+            <button class="btn btn-romantic" data-bs-toggle="modal" data-bs-target="#modalCarton">
+                <i class="fa-solid fa-plus"></i> 📥 Ajouter un carton
+            </button>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-romantic align-middle mb-0" id="cartons-table">
+                <thead>
+                    <tr>
+                        <th>📛 Joueur</th>
+                        <th>🏟 Club</th>
+                        <th>🟨 Jaunes</th>
+                        <th>🟥 Rouges</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for carton in cartons %}
+                        <tr>
+                            <td>{{ carton.joueur }}</td>
+                            <td>{{ carton.club }}</td>
+                            <td>
+                                <span class="icon-jaune"><i class="fa-solid fa-square"></i></span>
+                                <span class="fw-bold">{{ carton.jaunes }}</span>
+                            </td>
+                            <td>
+                                <span class="icon-rouge"><i class="fa-solid fa-square"></i></span>
+                                <span class="fw-bold">{{ carton.rouges }}</span>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">Aucun carton enregistré pour l’instant.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal d'ajout de carton -->
+    <div class="modal fade" id="modalCarton" tabindex="-1" aria-labelledby="modalCartonLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="border-radius:2rem;">
+          <div class="modal-header" style="border-top-left-radius:2rem;border-top-right-radius:2rem;">
+            <h5 class="modal-title" id="modalCartonLabel"><i class="fa-solid fa-plus"></i> Ajouter un carton</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+          </div>
+          <div class="modal-body">
+            <form id="form-ajout-carton">
+              <div class="mb-3">
+                <label class="form-label">Joueur</label>
+                <input type="text" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Club</label>
+                <input type="text" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Match</label>
+                <input type="text" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Type de carton</label>
+                <select class="form-select" required>
+                  <option value="jaune">🟨 Jaune</option>
+                  <option value="rouge">🟥 Rouge</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Minute</label>
+                <input type="number" class="form-control" min="1" max="120" required>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-romantic px-5">Ajouter</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        // Filtrage dynamique du tableau
+        document.addEventListener('DOMContentLoaded', function () {
+            const table = document.getElementById('cartons-table');
+            const rows = Array.from(table.querySelectorAll('tbody tr'));
+            const filterJoueur = document.getElementById('filter-joueur');
+            const filterClub = document.getElementById('filter-club');
+            const filterType = document.getElementById('filter-type');
+
+            function filterRows() {
+                const joueurVal = filterJoueur.value.toLowerCase();
+                const clubVal = filterClub.value.toLowerCase();
+                const typeVal = filterType.value;
+
+                rows.forEach(row => {
+                    const joueur = row.children[0].textContent.toLowerCase();
+                    const club = row.children[1].textContent.toLowerCase();
+                    const jaunes = parseInt(row.children[2].textContent) || 0;
+                    const rouges = parseInt(row.children[3].textContent) || 0;
+
+                    let show = true;
+                    if (joueurVal && !joueur.includes(joueurVal)) show = false;
+                    if (clubVal && !club.includes(clubVal)) show = false;
+                    if (typeVal === 'jaune' && jaunes === 0) show = false;
+                    if (typeVal === 'rouge' && rouges === 0) show = false;
+
+                    row.style.display = show ? '' : 'none';
+                });
+            }
+
+            filterJoueur.addEventListener('input', filterRows);
+            filterClub.addEventListener('input', filterRows);
+            filterType.addEventListener('change', filterRows);
+
+            // (Bonus UX) Reset filters on modal close
+            document.getElementById('modalCarton').addEventListener('hidden.bs.modal', function () {
+                document.getElementById('form-ajout-carton').reset();
+            });
+        });
+    </script>
+{% endblock %}

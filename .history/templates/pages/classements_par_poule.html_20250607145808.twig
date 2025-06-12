@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classements par poule{% endblock %}
+
+{% block body %}
+<div class="container my-4">
+    <h1 class="mb-4 text-center fw-bold">Classements par poule</h1>
+
+    <div class="row">
+        {% for poule, classements in poules %}
+            <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="card shadow-sm rounded-4 border-0 classement-card">
+                    <div class="card-header bg-primary text-white rounded-top-4">
+                        <h3 class="mb-0 text-center fw-bold">Poule {{ poule }}</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-striped table-hover mb-0 rounded-bottom-4">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Rang</th>
+                                    <th>Club</th>
+                                    <th>J</th>
+                                    <th>G</th>
+                                    <th>N</th>
+                                    <th>P</th>
+                                    <th>BM</th>
+                                    <th>BE</th>
+                                    <th>PTS</th>
+                                    <th>G/A</th>
+                                    <th>CJ</th>
+                                    <th>CR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for classement in classements %}
+                                    <tr>
+                                        <td>{{ classement.rang }}</td>
+                                        <td>{{ classement.club.nom }}</td>
+                                        <td>{{ classement.matchsjouer }}</td>
+                                        <td>{{ classement.gagnes }}</td>
+                                        <td>{{ classement.nuls }}</td>
+                                        <td>{{ classement.perdus }}</td>
+                                        <td>{{ classement.butsPour }}</td>
+                                        <td>{{ classement.butscontre }}</td>
+                                        <td>{{ classement.points }}</td>
+                                        <td>{{ classement.goalaverage }}</td>
+                                        <td>{{ classement.cartonsJaunes }}</td>
+                                        <td>{{ classement.cartonsRouges }}</td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="12" class="text-center">Aucun classement disponible</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

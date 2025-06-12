@@ -1,0 +1,9 @@
+# Fichier de routes pour le dashboard
+
+dashboard_home:
+    path: /dashboard
+    controller: App\Controller\DashboardController::index
+
+dashboard_scores:
+    path: /dashboard/scores
+    controller: App\Controller\MatchController::dashboardScores

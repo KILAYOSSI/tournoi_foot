@@ -1,0 +1,154 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques - Tournoi de Football Inter-Village{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h1 class="mb-4 text-center fw-bold">Statistiques du Tournoi</h1>
+
+    <div class="row g-4">
+        <!-- Top Buteurs -->
+        <section class="col-12 col-lg-6">
+            <div class="card shadow-sm rounded-4 p-4 h-100">
+                <h2 class="mb-3 text-primary fw-semibold">Top Buteurs</h2>
+                <ul class="list-group list-group-flush">
+                    {% for stat in topScorers %}
+                        <li class="list-group-item d-flex align-items-center gap-3">
+                            <span class="badge bg-warning text-dark fs-5 rounded-pill me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-weight: 700;">{{ loop.index }}</span>
+                            <img src="{{ asset('assets/images/joueurs/' ~ stat.joueur.id ~ '.png') }}" alt="{{ stat.joueur.nom }}" class="rounded-circle" width="60" height="60" onerror="this.style.display='none'">
+                            <div class="ms-3">
+                                <strong class="fs-4">{{ stat.joueur.nom }}</strong><br>
+                                <small class="fs-6">Buts : {{ stat.totalButs }}</small>
+                            </div>
+                            <img src="{{ asset('assets/images/trophe_buteur.svg') }}" alt="Trophée Meilleur Buteur" class="ms-auto" style="width: 40px; height: 40px;">
+                        </li>
+                    {% else %}
+                        <li class="list-group-item text-center text-muted">Aucun buteur disponible.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <!-- Top Passeurs -->
+        <section class="col-12 col-lg-6">
+            <div class="card shadow-sm rounded-4 p-4 h-100">
+                <h2 class="mb-3 text-primary fw-semibold">Top Passeurs</h2>
+                <ul class="list-group list-group-flush">
+                    {% for stat in topAssisters %}
+                        <li class="list-group-item d-flex align-items-center gap-3">
+                            <span class="badge bg-info text-white fs-5 rounded-pill me-3" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-weight: 700;">{{ loop.index }}</span>
+                            <div class="ms-3 flex-grow-1">
+                                <strong class="fs-4">{{ stat.joueur.nom }}</strong><br>
+                                <small class="fs-6">Passes : {{ stat.totalPasses }}</small>
+                            </div>
+                            <img src="{{ asset('assets/images/trophe_passeur.svg') }}" alt="Trophée Meilleur Passeur" class="ms-auto" style="width: 40px; height: 40px;">
+                        </li>
+                    {% else %}
+                        <li class="list-group-item text-center text-muted">Aucun passeur disponible.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <div class="row g-4 mt-4">
+        <!-- Top G/A -->
+        <section class="col-12 col-lg-6">
+            <div class="card shadow-sm rounded-4 p-4 h-100">
+                <h2 class="mb-3 text-primary fw-semibold">Top Buteurs + Passeurs (G/A)</h2>
+                <ul class="list-group list-group-flush">
+                    {% for stat in topGoalAssists %}
+                        <li class="list-group-item d-flex align-items-center gap-3">
+                            <img src="{{ asset('assets/images/joueurs/' ~ stat.joueur.id ~ '.png') }}" alt="{{ stat.joueur.nom }}" class="rounded-circle" width="50" height="50" onerror="this.style.display='none'">
+                            <div>
+                                <strong>{{ stat.joueur.nom }}</strong><br>
+                                <small>G/A : {{ stat.goalsAssists }}</small>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item text-center text-muted">Aucun joueur disponible.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <!-- Meilleurs Gardiens (Clean Sheets) -->
+        <section class="col-12 col-lg-6">
+            <div class="card shadow-sm rounded-4 p-4 h-100">
+                <h2 class="mb-3 text-primary fw-semibold">Meilleurs Gardiens (Clean Sheets)</h2>
+                <ul class="list-group list-group-flush">
+                    {% for stat in topCleanSheets %}
+                        <li class="list-group-item d-flex align-items-center gap-3">
+                            <img src="{{ asset('assets/images/joueurs/' ~ stat.joueur.id ~ '.png') }}" alt="{{ stat.joueur.nom }}" class="rounded-circle" width="50" height="50" onerror="this.style.display='none'">
+                            <div>
+                                <strong>{{ stat.joueur.nom }}</strong><br>
+                                <small>Clean Sheets : {{ stat.cleanSheets }}</small>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item text-center text-muted">Aucun gardien disponible.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Graphiques dynamiques -->
+    <div class="row mt-5">
+        <section class="col-12">
+            <div class="card shadow-sm rounded-4 p-4">
+                <h2 class="mb-4 text-primary fw-semibold">Graphiques de performance</h2>
+                <canvas id="performanceChart" style="width: 100%; height: 400px;"></canvas>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    const performanceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [{% for stat in topScorers %}'{{ stat.joueur.nom }}'{% if not loop.last %}, {% endif %}{% endfor %}],
+            datasets: [{
+                label: 'Buts',
+                data: [{% for stat in topScorers %}{{ stat.totalButs }}{% if not loop.last %}, {% endif %}{% endfor %}],
+                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                fill: true,
+                tension: 0.3
+            }, {
+                label: 'Passes',
+                data: [{% for stat in topAssisters %}{{ stat.totalPasses }}{% if not loop.last %}, {% endif %}{% endfor %}],
+                borderColor: 'rgba(255, 206, 86, 1)',
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: {
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            stacked: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Performances des joueurs (Buts et Passes)'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    precision: 0
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}

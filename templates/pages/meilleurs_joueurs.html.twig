@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Meilleurs joueurs{% endblock %}
+
+{% block body %}
+<h1>Meilleurs joueurs</h1>
+
+<h2>Meilleurs buteurs</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Joueur</th>
+            <th>Buts</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in meilleursButeurs %}
+        <tr>
+            <td>{{ stat.joueur.nom is defined ? stat.joueur.nom : 'Inconnu' }}</td>
+            <td>{{ stat.totalButs }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Meilleurs passeurs</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Joueur</th>
+            <th>Passes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in meilleursPasseurs %}
+        <tr>
+            <td>{{ stat.joueur.nom is defined ? stat.joueur.nom : 'Inconnu' }}</td>
+            <td>{{ stat.totalPasses }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Meilleurs G/A (Buts + Passes)</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Joueur</th>
+            <th>Total G/A</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in meilleursGA %}
+        <tr>
+            <td>{{ stat.joueur.nom is defined ? stat.joueur.nom : 'Inconnu' }}</td>
+            <td>{{ stat.totalGA }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

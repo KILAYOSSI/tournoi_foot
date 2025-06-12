@@ -1,0 +1,2 @@
+ALTER TABLE classement_poule ADD poule_id INT DEFAULT NULL;
+ALTER TABLE classement_poule ADD CONSTRAINT FK_CLASSEMENT_POULE_POULE FOREIGN KEY (poule_id) REFERENCES poule (id);

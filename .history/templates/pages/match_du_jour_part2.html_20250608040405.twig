@@ -1,0 +1,88 @@
+<section id="resultats">
+        <h2 class="mb-3">Résultats</h2>
+        <div class="filter-btns mb-3">
+            <button id="btn-jour" class="btn btn-outline-primary active">Résultats du jour</button>
+            <button id="btn-tous" class="btn btn-outline-primary">Tous les résultats</button>
+        </div>
+        <div id="resultats-jour" class="fade show">
+            {% for rencontre in matchsResultats %}
+                {% if rencontre.dateHeure|date('Y-m-d') == "now"|date('Y-m-d') %}
+                <div class="card match-card p-3 mb-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <img src="{{ asset('images/teams/' ~ rencontre.club1.logo) }}" alt="{{ rencontre.club1.nom }}" class="team-logo me-3" />
+                            <strong>{{ rencontre.club1.nom }}</strong>
+                        </div>
+                        <div class="text-center">
+                            <i class="fa-regular fa-clock"></i> {{ rencontre.dateHeure|date('H:i') }}
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <strong>{{ rencontre.club2.nom }}</strong>
+                            <img src="{{ asset('images/teams/' ~ rencontre.club2.logo) }}" alt="{{ rencontre.club2.nom }}" class="team-logo ms-3" />
+                        </div>
+                    </div>
+                    <div class="mt-2 text-center fw-bold">
+                        {{ rencontre.scoreclub1 }} - {{ rencontre.scoreclub2 }}
+                    </div>
+                </div>
+                {% endif %}
+            {% else %}
+            <p>Aucun résultat du jour.</p>
+            {% endfor %}
+        </div>
+        <div id="resultats-tous" class="fade" style="display:none;">
+            {% for rencontre in matchsResultats %}
+            <div class="card match-card p-3 mb-3">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <img src="{{ asset('images/teams/' ~ rencontre.club1.logo) }}" alt="{{ rencontre.club1.nom }}" class="team-logo me-3" />
+                        <strong>{{ rencontre.club1.nom }}</strong>
+                    </div>
+                    <div class="text-center">
+                        <i class="fa-regular fa-clock"></i> {{ rencontre.dateHeure|date('d/m/Y H:i') }}
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <strong>{{ rencontre.club2.nom }}</strong>
+                        <img src="{{ asset('images/teams/' ~ rencontre.club2.logo) }}" alt="{{ rencontre.club2.nom }}" class="team-logo ms-3" />
+                    </div>
+                </div>
+                <div class="mt-2 text-center fw-bold">
+                    {{ rencontre.scoreclub1 }} - {{ rencontre.scoreclub2 }}
+                </div>
+            </div>
+            {% else %}
+            <p>Aucun résultat disponible.</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnJour = document.getElementById('btn-jour');
+            const btnTous = document.getElementById('btn-tous');
+            const resultatsJour = document.getElementById('resultats-jour');
+            const resultatsTous = document.getElementById('resultats-tous');
+
+            btnJour.addEventListener('click', function () {
+                btnJour.classList.add('active');
+                btnTous.classList.remove('active');
+                resultatsJour.style.display = 'block';
+                resultatsTous.style.display = 'none';
+                resultatsJour.classList.add('fade');
+                resultatsTous.classList.remove('fade');
+            });
+
+            btnTous.addEventListener('click', function () {
+                btnTous.classList.add('active');
+                btnJour.classList.remove('active');
+                resultatsTous.style.display = 'block';
+                resultatsJour.style.display = 'none';
+                resultatsTous.classList.add('fade');
+                resultatsJour.classList.remove('fade');
+            });
+        });
+    </script>
+{% endblock %}
