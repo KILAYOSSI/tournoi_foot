@@ -1,0 +1,177 @@
+admin_dashboard:
+    path: /admin-panel
+    controller: App\Controller\Admin\AdminController::index
+
+admin_login:
+    path: /admin/login
+    controller: App\Controller\Admin\SecurityController::login
+
+admin_logout:
+    path: /admin/logout
+    controller: App\Controller\Admin\SecurityController::logout
+
+admin_clubs:
+    path: /admin-panel/clubs
+    controller: App\Controller\Admin\AdminClubController::index
+
+admin_clubs_new:
+    path: /admin-panel/clubs/new
+    controller: App\Controller\Admin\AdminClubController::new
+
+admin_clubs_edit:
+    path: /admin-panel/clubs/{id}/edit
+    controller: App\Controller\Admin\AdminClubController::edit
+
+admin_clubs_delete:
+    path: /admin-panel/clubs/{id}/delete
+    controller: App\Controller\Admin\AdminClubController::delete
+    methods: [POST]
+
+admin_joueurs:
+    path: /admin-panel/joueurs
+    controller: App\Controller\Admin\AdminJoueurController::index
+
+admin_joueurs_new:
+    path: /admin-panel/joueurs/new
+    controller: App\Controller\Admin\AdminJoueurController::new
+
+admin_joueurs_edit:
+    path: /admin-panel/joueurs/{id}/edit
+    controller: App\Controller\Admin\AdminJoueurController::edit
+
+admin_joueurs_delete:
+    path: /admin-panel/joueurs/{id}/delete
+    controller: App\Controller\Admin\AdminJoueurController::delete
+    methods: [POST]
+
+admin_matchs:
+    path: /admin-panel/matchs
+    controller: App\Controller\Admin\AdminMatchController::index
+
+admin_matchs_new:
+    path: /admin-panel/matchs/new
+    controller: App\Controller\Admin\AdminMatchController::new
+
+admin_matchs_edit:
+    path: /admin-panel/matchs/{id}/edit
+    controller: App\Controller\Admin\AdminMatchController::edit
+
+admin_matchs_delete:
+    path: /admin-panel/matchs/{id}/delete
+    controller: App\Controller\Admin\AdminMatchController::delete
+    methods: [POST]
+
+admin_rencontres:
+    path: /admin-panel/rencontres
+    controller: App\Controller\Admin\AdminRencontreController::index
+
+admin_rencontres_new:
+    path: /admin-panel/rencontres/new
+    controller: App\Controller\Admin\AdminRencontreController::new
+
+admin_rencontres_edit:
+    path: /admin-panel/rencontres/{id}/edit
+    controller: App\Controller\Admin\AdminRencontreController::edit
+
+admin_rencontres_delete:
+    path: /admin-panel/rencontres/{id}/delete
+    controller: App\Controller\Admin\AdminRencontreController::delete
+    methods: [POST]
+
+admin_cartons:
+    path: /admin-panel/cartons
+    controller: App\Controller\Admin\AdminCartonController::index
+
+admin_cartons_new:
+    path: /admin-panel/cartons/new
+    controller: App\Controller\Admin\AdminCartonController::new
+
+admin_cartons_edit:
+    path: /admin-panel/cartons/{id}/edit
+    controller: App\Controller\Admin\AdminCartonController::edit
+
+admin_cartons_delete:
+    path: /admin-panel/cartons/{id}/delete
+    controller: App\Controller\Admin\AdminCartonController::delete
+    methods: [POST]
+
+admin_statistiques:
+    path: /admin-panel/statistiques
+    controller: App\Controller\Admin\AdminStatistiqueController::index
+
+admin_statistiques_new:
+    path: /admin-panel/statistiques/new
+    controller: App\Controller\Admin\AdminStatistiqueController::new
+
+admin_statistiques_edit:
+    path: /admin-panel/statistiques/{id}/edit
+    controller: App\Controller\Admin\AdminStatistiqueController::edit
+
+admin_statistiques_delete:
+    path: /admin-panel/statistiques/{id}/delete
+    controller: App\Controller\Admin\AdminStatistiqueController::delete
+    methods: [POST]
+
+admin_resultats_index:
+    path: /admin-panel/resultats
+    controller: App\Controller\Admin\AdminResultatController::index
+
+admin_resultats_new:
+    path: /admin-panel/resultats/new
+    controller: App\Controller\Admin\AdminResultatController::new
+
+admin_resultats_edit:
+    path: /admin-panel/resultats/{id}/edit
+    controller: App\Controller\Admin\AdminResultatController::edit
+
+admin_resultats_delete:
+    path: /admin-panel/resultats/{id}/delete
+    controller: App\Controller\Admin\AdminResultatController::delete
+    methods: [POST]
+
+_dev_profiler:
+    resource: 'routes/dev_profiler.yaml'
+    prefix: /_profiler
+
+statistiques_formation:
+    resource: 'routes/statistiques_formation.yaml'
+
+statistiques:
+    resource: 'routes/statistiques.yaml'
+
+dashboard_scores:
+    path: /dashboard/scores
+    controller: App\Controller\MatchController::dashboardScores
+
+matchs:
+    resource: 'routes/matchs.yaml'
+    prefix: /
+
+match_du_jour:
+    resource: 'routes/match_du_jour.yaml'
+
+dashboard:
+    resource: 'routes/dashboard.yaml'
+    prefix: /
+
+pages:
+    resource: 'routes/pages.yaml'
+
+cartons:
+    resource: 'routes/cartons.yaml'
+
+vote:
+    resource: 'routes/vote.yaml'
+
+calendrier:
+    resource: 'routes/calendrier.yaml'
+
+meilleurs_joueurs:
+    resource: 'routes/meilleurs_joueurs.yaml'
+
+clubs_joueurs:
+    resource: 'routes/clubs_joueurs.yaml'
+
+home:
+    path: /
+    controller: App\Controller\HomeController::index

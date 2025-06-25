@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+<h1>Statistiques</h1>
+
+{# Removed usage of 'classements' variable as it no longer exists #}
+
+<h2>Joueurs Stats</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Buts</th>
+            <th>Passes</th>
+            <th>Cartons Jaunes</th>
+            <th>Cartons Rouges</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in joueursStats %}
+            {% if stat.totalButs > 0 or stat.totalPasses > 0 or stat.totalCartonsJaunes > 0 or stat.totalCartonsRouges > 0 %}
+            <tr>
+                <td>{{ stat.joueur ? stat.joueur.nom : 'N/A' }}</td>
+                <td>{{ stat.totalButs }}</td>
+                <td>{{ stat.totalPasses }}</td>
+                <td>{{ stat.totalCartonsJaunes }}</td>
+                <td>{{ stat.totalCartonsRouges }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Top Buteurs</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Buts</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in topScorers %}
+            <tr>
+                <td>{{ stat.joueur ? stat.joueur.nom : 'N/A' }}</td>
+                <td>{{ stat.totalButs }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Top Passeurs</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Passes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in topAssisters %}
+            <tr>
+                <td>{{ stat.joueur ? stat.joueur.nom : 'N/A' }}</td>
+                <td>{{ stat.totalPasses }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Top Buts + Passes</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in topGoalAssists %}
+            <tr>
+                <td>{{ stat.joueur ? stat.joueur.nom : 'N/A' }}</td>
+                <td>{{ stat.goalsAssists }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Top Clean Sheets</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Clean Sheets</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in topCleanSheets %}
+            <tr>
+                <td>{{ stat.joueur ? stat.joueur.nom : 'N/A' }}</td>
+                <td>{{ stat.cleanSheets }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
