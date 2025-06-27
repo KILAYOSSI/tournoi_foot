@@ -6,6 +6,7 @@
     <title>{% block title %}Tournoi de Football Inter-Village{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/custom_home.css') }}" />
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
@@ -14,7 +15,7 @@
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ path('home') }}" style="font-weight: bold; font-size: 1.5rem; color: white; text-shadow: 0 0 5px rgba(255,255,255,0.7);">
 <img src="{{ asset('assets/WhatsApp Image 2025-06-23 à 13.44.55_704b8a70.jpg') }}" alt="Logo" height="80" class="d-inline-block align-text-top me-2" style="filter: drop-shadow(0 0 5px #fff); border-radius: 0.5rem; max-height: 100px; max-width: 100px; object-fit: contain;"/>
-                    <span style="background: linear-gradient(45deg, #ff6a00, #ee0979); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Tournoi Foot</span>
+                    <span style="color: white;">Tournoi Foot</span>
                 </a>
                 <button
                     class="navbar-toggler border-0"
@@ -29,15 +30,17 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="megaNavbar">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold">
                         <li class="nav-item">
-                            <a class="nav-link text-white d-flex align-items-center" href="{{ path('home') }}">
+                            <a class="nav-link text-white d-flex align-items-center" href="{{ path('home') }}" style="position: relative;">
                                 <i class="fas fa-home me-1"></i> Accueil
+                                <span class="nav-highlight"></span>
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white d-flex align-items-center" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-white d-flex align-items-center" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="position: relative;">
                                 <i class="fas fa-star me-1"></i> Services
+                                <span class="nav-highlight"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="servicesDropdown" style="background: linear-gradient(135deg, #667eea, #764ba2); border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
                                 <li><a class="dropdown-item text-white" href="{{ path('vote') }}"><i class="fas fa-vote-yea me-2"></i> Vote</a></li>
@@ -48,8 +51,9 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white d-flex align-items-center" href="{{ path('about') }}">
+                            <a class="nav-link text-white d-flex align-items-center" href="{{ path('about') }}" style="position: relative;">
                                 <i class="fas fa-info-circle me-1"></i> Qui sommes-nous ?
+                                <span class="nav-highlight"></span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -65,20 +69,7 @@
         {% block body %}{% endblock %}
     </main>
 
-    <footer class="bg-dark text-white text-center py-5" style="min-height: 300px;">
-        <div class="container">
-            <h4 class="mb-4">Tournoi de Football Inter-Village</h4>
-            <p>© {{ "now"|date("Y") }} Tous droits réservés.</p>
-            <p>Contactez-nous : contact@tournoifootball.com | +33 1 23 45 67 89</p>
-            <p>Adresse : 123 Rue du Football, Paris, France</p>
-            <p>Suivez-nous sur les réseaux sociaux :</p>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="#" class="text-white">Facebook</a></li>
-                <li class="list-inline-item"><a href="#" class="text-white">Twitter</a></li>
-                <li class="list-inline-item"><a href="#" class="text-white">Instagram</a></li>
-            </ul>
-        </div>
-    </footer>
+    {% include 'includes/footer.html.twig' %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {% block javascripts %}
