@@ -20,7 +20,7 @@
                 <div class="match-list" style="height: 100%; display: flex; flex-direction: column;">
                     {% for match in matchsAVenir %}
                         <div class="match-item shadow p-3 mb-4 bg-white rounded" style="flex-grow: 1;">
-                            <div class="match-date text-center text-white fw-bold">
+                            <div class="match-date text-center text-dark fw-bold">
                                 {{ match.date|date('l j F Y')|capitalize }} KICK-OFF AT {{ match.date|date('H:i') }} UK/ {{ match.date|date('H:i')|date_modify('+1 hour')|date('H:i') }} CET
                             </div>
                             <div class="match-content d-flex align-items-center justify-content-between">

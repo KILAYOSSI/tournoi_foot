@@ -7,25 +7,25 @@ contact:
     controller: App\Controller\HomeController::contact
 
 conditions:
-    path: /conditions.html
+    path: /conditions
     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
         template: conditions.html.twig
 
 confidentialite:
-    path: /confidentialite.html
+    path: /confidentialite
     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
         template: confidentialite.html.twig
 
 cookies:
-    path: /cookies.html
+    path: /cookies
     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
         template: cookies.html.twig
 
 parametres:
-    path: /parametres.html
+    path: /parametres
     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
         template: parametres.html.twig

@@ -10,22 +10,22 @@ conditions:
     path: /conditions.html
     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
-        template: conditions.html.twig
+        template: conditions.html
 
 confidentialite:
     path: /confidentialite.html
     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
-        template: confidentialite.html.twig
+        template: confidentialite.html
 
 cookies:
     path: /cookies.html
     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
-        template: cookies.html.twig
+        template: cookies.html
 
 parametres:
     path: /parametres.html
     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
-        template: parametres.html.twig
+        template: parametres.html
