@@ -1,0 +1,78 @@
+.custom-margin {
+    margin-right: 20px !important;
+    float: left !important;
+}
+
+.margin-right-only {
+    margin-right: 20px !important;
+}
+
+/* Styles pour le ticker d'informations défilantes */
+.ticker-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: transparent;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 10px 0;
+    box-sizing: border-box;
+    position: relative;
+    height: 30px;
+}
+
+.ticker-text {
+    display: inline-block;
+    white-space: nowrap;
+    color: black;
+    font-size: 1rem;
+    position: absolute;
+    will-change: transform;
+    animation: ticker-scroll 15s linear infinite;
+}
+
+@keyframes ticker-scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Ajout d'un effet de surbrillance vert gazon sur les éléments du menu navbar */
+.navbar-nav .nav-link {
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  background-color: #4CAF50 !important; /* Couleur vert gazon */
+  border-radius: 0.25rem;
+  color: white !important;
+  z-index: 10;
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+  background-color: #4CAF50 !important; /* Couleur vert gazon */
+  color: white !important;
+  cursor: pointer;
+}
+
+.navbar-nav .nav-link .nav-highlight {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #4CAF50 !important; /* Couleur vert gazon */
+  border-radius: 2px 2px 0 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover .nav-highlight,
+.navbar-nav .nav-link:focus .nav-highlight {
+  opacity: 1;
+}

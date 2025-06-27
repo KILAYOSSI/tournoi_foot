@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container my-5">
+    <!-- Bannière principale -->
+    <section class="hero-section position-relative rounded overflow-hidden mb-5" style="height: 150px; border-radius: 0.5rem; background: url('{{ asset('assets/WhatsApp Image 2025-06-24 à 20.09.41_6bca5883.jpg') }}') center center / cover no-repeat;">
+        <div class="overlay position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0, 0, 0, 0.4);"></div>
+        <div class="hero-content position-relative h-100 d-flex flex-column justify-content-center align-items-start text-white text-start px-3">
+            <h1 class="display-4 fw-bold text-uppercase" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">Tournoi<br>Duo Eugène Roméo</h1>
+            <a href="{{ path('about') }}" class="btn btn-outline-light btn-sm mt-3 rounded-pill" style="font-weight: 700; letter-spacing: 0.1em;">En savoir plus</a>
+        </div>
+    </section>
+
+    <!-- Section À PROPOS avec 4 blocs -->
+    <section class="about-section py-5">
+        <div class="row text-center g-4">
+            <div class="col-md-3">
+                <div class="about-box p-4 rounded shadow-sm bg-white text-dark h-100 d-flex flex-column justify-content-start align-items-center">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-25 à 00.20.17_fab2d237.jpg') }}" alt="Des équipes" style="width: 80px; height: 80px; margin-bottom: 1rem;">
+                    <h5 class="fw-bold">DES ÉQUIPES</h5>
+                    <p>Découvrez les équipes passionnées qui font vibrer notre tournoi. Chaque équipe apporte son énergie unique et son esprit de compétition.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="about-box p-4 rounded shadow-sm bg-white text-dark h-100 d-flex flex-column justify-content-start align-items-center">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-25 à 00.20.16_561d9b70.jpg') }}" alt="Phase qualificative" style="width: 80px; height: 80px; margin-bottom: 1rem;">
+                    <h5 class="fw-bold">PHASE QUALIFICATIVE</h5>
+                    <p>Vivez l'intensité des matchs qualificatifs et soutenez vos favoris. Chaque rencontre est une bataille stratégique pleine de suspense.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="about-box p-4 rounded shadow-sm bg-white text-dark h-100 d-flex flex-column justify-content-start align-items-center">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-25 à 00.20.17_b34a09f6.jpg') }}" alt="Phases finales" style="width: 80px; height: 80px; margin-bottom: 1rem;">
+                    <h5 class="fw-bold">PHASES FINALES</h5>
+                    <p>Assistez aux moments décisifs qui révèlent les champions. Chaque match final est une démonstration de talent et de détermination.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="about-box p-4 rounded shadow-sm bg-white text-dark h-100 d-flex flex-column justify-content-start align-items-center">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-25 à 00.20.15_8faa6a73.jpg') }}" alt="Matchs passionnants" style="width: 80px; height: 80px; margin-bottom: 1rem;">
+                    <h5 class="fw-bold">MATCHS PASSIONNANTS</h5>
+                    <p>Ne manquez aucun match grâce à notre calendrier complet et à la passion partagée par les supporters. Vivez chaque moment intensément.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

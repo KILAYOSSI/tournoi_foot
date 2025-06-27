@@ -1,0 +1,32 @@
+/* Style CSS with hover effect green, enlarged statistics title and numbers */
+
+.navbar-nav .nav-link.dropdown-toggle.fs-4.fw-bold.text-danger {
+    color: #28a745 !important; /* green color */
+}
+
+.navbar-nav .dropdown-menu {
+    border: 2px solid #28a745 !important; /* green border */
+}
+
+.navbar-nav .nav-link.statistiques-link {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #28a745 !important;
+}
+
+.cartons-table tbody tr:hover {
+    transform: translateY(-5px);
+    background-color: #d4edda; /* light green background on hover */
+}
+
+h1.text-center.mb-4.fw-bold {
+    font-size: 2.5rem !important; /* enlarged title */
+    color: #28a745 !important;
+}
+
+/* Additional styling for footer */
+footer.bg-dark.text-white.text-center.py-5 {
+    font-size: 1.1rem;
+}
+
+/* Add any other styles you remember from your modifications here */
