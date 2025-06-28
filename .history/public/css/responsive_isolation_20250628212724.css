@@ -1,0 +1,124 @@
+/* Fichier CSS pour isoler les styles entre mobile et desktop */
+
+/* Styles desktop uniquement */
+@media (min-width: 769px) {
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+
+    header {
+        background-color: #343a40;
+        padding: 10px 20px;
+    }
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .navbar-brand a {
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .navbar-menu {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar-menu li {
+        margin-left: 20px;
+    }
+
+    .navbar-menu li a {
+        color: #fff;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .navbar-menu li a:hover,
+    .navbar-menu li a.active {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .navbar-toggle {
+        display: none;
+    }
+}
+
+/* Styles mobile uniquement */
+@media (max-width: 768px) {
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+
+    header {
+        background-color: #343a40;
+        padding: 10px 20px;
+        position: relative;
+    }
+
+    .navbar-menu {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        background-color: #343a40;
+        position: fixed;
+        top: 60px;
+        right: -220px; /* caché hors écran */
+        width: 200px;
+        height: 100vh;
+        transition: right 0.3s ease;
+        z-index: 1000;
+    }
+
+    .navbar-menu.show {
+        right: 0;
+    }
+
+    .navbar-menu li {
+        margin: 10px 0;
+    }
+
+    .navbar-menu li a {
+        color: #fff;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+
+    .navbar-menu li a:hover,
+    .navbar-menu li a.active {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .navbar-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: white;
+        background: none;
+        border: none;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        z-index: 1100;
+    }
+}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier des matchs{% endblock %}
+
+{% block body %}
+<div class="calendrier-container">
+
+  <div class="matchday">
+    <img src="/assets/WhatsApp Image 2025-06-23 à 13.44.55_704b8a70.jpg" alt="Logo" class="matchday-logo"/>
+    <h1 class="matchday-title">MATCHDAY 1</h1>
+    <h2 class="matchday-subtitle">29 juin - 02 juillet 2025</h2>
+  </div>
+
+  <div class="match-list">
+    {% for match in matchsAVenir %}
+      <div class="match">
+        <div>
+          <div class="team">{{ match.club1.nom|upper }}</div>
+        </div>
+        <div class="vs">
+          VS<br/>
+          <span class="match-date">{{ match.date|date('d') }} {{ match.date|date('F')|replace({'January':'janvier','February':'février','March':'mars','April':'avril','May':'mai','June':'juin','July':'juillet','August':'août','September':'septembre','October':'octobre','November':'novembre','December':'décembre'}) }} {{ match.date|date('Y') }} à {{ match.date|date('H:i') }}</span>
+        </div>
+        <div>
+          <div class="team">{{ match.club2.nom|upper }}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="footer">
+    FOOTBALL AS IT’S MEANT TO BE
+  </div>
+
+</div>
+{% endblock %}

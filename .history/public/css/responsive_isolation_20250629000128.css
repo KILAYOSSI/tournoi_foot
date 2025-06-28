@@ -1,0 +1,39 @@
+/* Correction des sélecteurs .navbar-menu en .navbar-nav pour cohérence avec Bootstrap */
+
+.navbar-nav {
+    list-style: none;
+}
+
+.navbar-nav li {
+    margin-left: 20px;
+}
+
+.navbar-nav li a {
+    color: #fff;
+}
+
+.navbar-nav li a:hover,
+.navbar-nav li a.active {
+    background-color: #007bff;
+}
+
+.navbar-nav {
+    list-style: none;
+}
+
+.navbar-nav.show {
+    right: 0;
+}
+
+.navbar-nav li {
+    margin: 10px 0;
+}
+
+.navbar-nav li a {
+    color: #fff;
+}
+
+.navbar-nav li a:hover,
+.navbar-nav li a.active {
+    background-color: #007bff;
+}
