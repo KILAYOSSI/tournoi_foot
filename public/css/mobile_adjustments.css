@@ -4,15 +4,15 @@
 /* Appliquer les styles uniquement sur mobile */
 @media (max-width: 768px) {
     .hero-section {
-        height: 300px !important;
-        background-position: center center !important;
-        background-size: contain !important;
+        height: 300px;
+        background-position: center center;
+        background-size: contain;
     }
     .hero-section .btn {
-        margin-right: 0 !important;
-        margin-top: 10px !important;
-        margin-bottom: 10px !important;
-        font-size: 1rem !important;
+        margin-right: 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 1rem;
     }
 }
 
@@ -24,8 +24,8 @@
 
 /* Forcer le tableau à ne pas couper les colonnes sur mobile */
 .table-classement {
-    table-layout: auto !important;
-    width: 100% !important;
+    table-layout: auto;
+    width: 100%;
 }
 
 /* Réduction de la taille des colonnes du tableau classement */
@@ -46,8 +46,8 @@
 /* Pour éviter que les éléments débordent */
 .container,
 .container-fluid {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 /* Media query pour écrans max 768px (tablettes et mobiles) */

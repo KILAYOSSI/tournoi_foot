@@ -64,7 +64,7 @@ body, body * {
     animation: clignotement 1s linear infinite;
     font-weight: 900;
     font-size: 3rem;
-    color: red !important;
+    color: red;
 }
 
 /* Styles spécifiques pour les cartes de statistiques */
@@ -142,7 +142,7 @@ main {
     max-width: 1200px;
     margin: 30px auto;
     padding: 0 20px;
-    background-color: #fff;
+    background-color: transparent;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     min-height: 600px;
@@ -220,8 +220,8 @@ th {
 /* Styles pour les boîtes de statistiques */
 
 .stats-container {
-    background-color: #0d47a1 !important;
-    background: linear-gradient(135deg, #0d47a1, #1976d2) !important;
+    background-color: #0d47a1;
+    background: linear-gradient(135deg, #0d47a1, #1976d2);
     border-radius: 12px;
     padding: 20px;
     color: #0d47a1; /* couleur bleue pour le texte */
@@ -266,6 +266,20 @@ th {
 
     .navbar-menu li {
         margin: 10px 0;
+    }
+
+    /* Fix for navbar toggler button visibility */
+.navbar-toggler {
+    display: block;
+}
+
+    /* Fix for navbar collapse */
+    .navbar-collapse {
+        display: none;
+    }
+
+    .navbar-collapse.show {
+        display: block;
     }
 }
 
@@ -339,7 +353,7 @@ th {
 .navbar-nav > li > a.nav-link:hover,
 .navbar-nav > li > a.nav-link.active {
     background-color: #007bff;
-    color: white !important;
+    color: white;
 }
 
 .navbar-nav > li.dropdown.position-static:hover > .dropdown-menu {
@@ -359,13 +373,13 @@ th {
 }
 
 .dropdown-menu {
-    border-radius: 1rem !important;
+    border-radius: 1rem;
     box-shadow: 0 8px 20px rgba(255, 111, 145, 0.4);
     font-family: 'Georgia', serif;
     font-size: 1.3rem;
     color: #ff4a75;
     background: linear-gradient(135deg, #ffe6f0, #fff0f6);
-    padding: 2rem !important;
+    padding: 2rem;
 }
 
 .dropdown-menu a.dropdown-item {
@@ -375,8 +389,8 @@ th {
 }
 
 .dropdown-menu a.dropdown-item:hover {
-    color: #fff !important;
-    background-color: #ff6f91 !important;
+    color: #fff;
+    background-color: #ff6f91;
     transform: scale(1.1);
     box-shadow: 0 0 10px #ff6f91;
     font-weight: bold;
@@ -393,13 +407,13 @@ th {
 .navbar-nav > li.dropdown.position-static > a.nav-link {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #ff4a75 !important;
+    color: #ff4a75;
     text-shadow: 0 0 5px #ff6f91;
     transition: color 0.3s ease;
 }
 
 .navbar-nav > li.dropdown.position-static > a.nav-link:hover {
-    color: #ff1a4d !important;
+    color: #ff1a4d;
     text-shadow: 0 0 10px #ff1a4d;
 }
 
@@ -407,9 +421,9 @@ th {
 
 /* Images du carrousel */
 #carouselImages .carousel-item img {
-    object-fit: cover !important;
-    height: 400px !important;
-    width: 100% !important;
+    object-fit: cover;
+    height: 400px;
+    width: 100%;
 }
 
 /* Images des sections "Notre travail en action", "Qui sommes-nous", "Comment nous travaillons" */
@@ -422,10 +436,10 @@ th {
 
 /* Sections alignées avec le carrousel "En savoir plus" */
 .container-uefa {
-    max-width: 1140px !important;
-    margin: 0 auto !important;
-    padding: 0 1rem !important;
-    width: 100% !important;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
 }
 
 /* Animation de défilement horizontal (ticker) pour les textes sous les icônes dans elegant-features */
@@ -461,60 +475,6 @@ th {
     animation: icon-glow 3s ease-in-out infinite alternate;
 }
 
-@keyframes va-et-vient-sophistique {
-    0%, 100% {
-        left: 0;
-        color: #ff4081;
-        text-shadow:
-            0 0 5px #ff80ab,
-            0 0 10px #ff4081,
-            0 0 20px #e040fb,
-            0 0 30px #d500f9;
-    }
-    50% {
-        left: 15px;
-        color: #e040fb;
-        text-shadow:
-            0 0 10px #ea80fc,
-            0 0 20px #d500f9,
-            0 0 30px #aa00ff,
-            0 0 40px #7c4dff;
-    }
-}
-
-@keyframes icon-glow {
-    0% {
-        filter: drop-shadow(0 0 5px #ff4081);
-    }
-    50% {
-        filter: drop-shadow(0 0 15px #d500f9);
-    }
-    100% {
-        filter: drop-shadow(0 0 5px #ff4081);
-    }
-}
-
-/* Classe pour le texte animé en va-et-vient sous les icônes */
-.animated-text {
-    margin-top: 0.5rem;
-    font-weight: 700;
-    color: #ff4081;
-    text-shadow:
-        0 0 5px #ff80ab,
-        0 0 10px #ff4081,
-        0 0 20px #e040fb,
-        0 0 30px #d500f9;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 150px;
-    text-align: center;
-    position: relative;
-    animation: va-et-vient-sophistique 4s ease-in-out infinite;
-    /* Added to ensure smooth movement */
-    display: inline-block;
-}
-
-/* Augmentation de la distance de déplacement pour une meilleure visibilité */
 @keyframes va-et-vient-sophistique {
     0%, 100% {
         left: 0;
