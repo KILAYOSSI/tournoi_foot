@@ -1,0 +1,36 @@
+.custom-margin {
+    margin-right: 20px !important;
+    float: left !important;
+}
+
+.margin-right-only {
+    margin-right: 20px !important;
+}
+
+/* Styles pour le ticker d'informations défilantes */
+.ticker-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: transparent;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 10px 0;
+    box-sizing: border-box;
+}
+
+.ticker-text {
+    display: inline-block;
+    white-space: nowrap;
+    color: black;
+    font-size: 1rem;
+    animation: ticker-scroll 20s linear infinite;
+}
+
+@keyframes ticker-scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}

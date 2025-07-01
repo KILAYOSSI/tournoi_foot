@@ -1,0 +1,40 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Gestion des Cartons{% endblock %}
+
+{% block body %}
+<h1>Liste des Cartons</h1>
+
+<a href="{{ path('admin_cartons_new') }}" class="btn btn-primary mb-3">Ajouter un carton</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Joueur</th>
+            <th>Type de Carton</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for carton in cartons %}
+            <tr>
+                <td>{{ carton.joueur.nom }}</td>
+                <td>{{ carton.type }}</td>
+                <td>{{ carton.date ? carton.date|date('d/m/Y H:i') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_cartons_edit', {'id': carton.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+                    <form method="post" action="{{ path('admin_cartons_delete', {'id': carton.id}) }}" style="display:inline-block;" onsubmit="return confirm('Voulez-vous vraiment supprimer ce carton ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ carton.id) }}">
+                        <button class="btn btn-sm btn-danger">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun carton trouvé.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

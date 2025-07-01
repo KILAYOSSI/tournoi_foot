@@ -1,0 +1,34 @@
+<h2 class="mb-4">Informations Tournoi</h2>
+        <div class="p-4 rounded shadow-sm bg-light">
+            <h5>Prix de participation des équipes</h5>
+            <p>Chaque équipe doit payer un montant de <strong>12000 FCFA</strong> pour participer au tournoi.</p>
+            <h5>Règle du jeu</h5>
+            <p>Le tournoi se déroule en phases de poules suivies d'une phase finale à élimination directe. Chaque match dure 90 minutes, et tirs au but en cas d'égalité.</p>
+            <h5>Prix des cartons et sanctions</h5>
+            <ul>
+                <li>Carton jaune : Avertissement</li>
+                <li>Carton rouge : Expulsion immédiate du joueur</li>
+                <li>Accumulation de 3 cartons jaunes : Suspension d'un match</li>
+                <li>Comportement antisportif : Sanctions disciplinaires pouvant aller jusqu'à l'exclusion du tournoi</li>
+            </ul>
+        </div>
+    </section>
+=======
+    <section class="info-tournoi-card">
+        <h4>Informations Tournoi</h4>
+        <div>
+            <h5>💰 Prix de participation des équipes</h5>
+            <p>Chaque équipe doit payer un montant de <strong>12 000 FCFA</strong> pour participer au tournoi.</p>
+
+            <h5>🎯 Règle du jeu</h5>
+            <p>Le tournoi se déroule en phases de poules suivies d'une phase finale à élimination directe. Chaque match dure <strong>90 minutes</strong>, avec tirs au but en cas d’égalité.</p>
+
+            <h5>🚨 Prix des cartons et sanctions</h5>
+            <ul>
+                <li>🟨 <strong>Carton jaune</strong> : Avertissement</li>
+                <li>🟥 <strong>Carton rouge</strong> : Expulsion immédiate du joueur</li>
+                <li>⚠ <strong>3 cartons jaunes</strong> : Suspension d’un match</li>
+                <li>❌ <strong>Comportement antisportif</strong> : Sanctions pouvant aller jusqu’à l’exclusion du tournoi</li>
+            </ul>
+        </div>
+    </section>

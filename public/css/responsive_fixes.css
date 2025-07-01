@@ -1,0 +1,43 @@
+/* Responsive fixes for small screens */
+
+@media (max-width: 768px) {
+    .navbar-menu {
+        flex-direction: column;
+        background-color: #343a40;
+        position: fixed;
+        top: 56px;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        height: calc(100vh - 56px);
+        overflow-y: auto;
+        display: none;
+        z-index: 1050;
+        border-radius: 0 0 0 10px;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    }
+
+    .navbar-menu.show {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar-menu li {
+        margin: 10px 0;
+    }
+
+    /* Fix for navbar toggler button visibility */
+    .navbar-toggler {
+        display: block;
+        z-index: 1100;
+    }
+
+    /* Fix for navbar collapse */
+    .navbar-collapse {
+        display: none;
+    }
+
+    .navbar-collapse.show {
+        display: block;
+    }
+}

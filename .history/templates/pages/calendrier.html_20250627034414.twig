@@ -1,0 +1,156 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier des matchs{% endblock %}
+
+{% block body %}
+<div class="container my-5 text-black" style="background-image: url('/assets/images/football-background.jpg'); background-size: cover; background-position: center; border-radius: 15px; padding: 30px;">
+    <h1 class="text-center mb-5 fw-bold" style="margin-top: 20px;">Calendrier des matchs</h1>
+
+    <div class="text-center mb-4">
+        <a href="{{ path('calendrier_export_pdf') }}" class="btn btn-danger">Exporter en PDF</a>
+    </div>
+
+    <div class="row g-4" style="display: flex; flex-wrap: nowrap;">
+        {# Section Matchs à venir - Left side #}
+        <section class="matchs-a-venir col-12 col-lg-6" style="flex: 1; max-width: 50%;">
+            <h2 class="mb-4 fw-semibold text-center text-black" style="margin-top: 20px;">Matchs à venir</h2>
+            {% if matchsAVenir is empty %}
+                <p class="text-center text-muted fs-5">Aucun match à venir.</p>
+            {% else %}
+                <div class="match-list" style="height: 100%; display: flex; flex-direction: column;">
+                    {% for match in matchsAVenir %}
+                        <div class="match-item shadow p-3 mb-4 bg-white rounded" style="flex-grow: 1;">
+                            <div class="match-date text-center text-dark fw-bold">
+                                {{ match.date|date('l j F Y')|capitalize }} KICK-OFF AT {{ match.date|date('H:i') }} UK/ {{ match.date|date('H:i')|date_modify('+1 hour')|date('H:i') }} CET
+                            </div>
+                            <div class="match-content d-flex align-items-center justify-content-between">
+                                <div class="club d-flex align-items-center gap-2">
+                                    <span class="club-name text-primary fw-bold">{{ match.club1.nom|upper }}</span>
+                                </div>
+                                <div class="vs-box text-white fw-bold bg-danger rounded px-3 py-1">VS</div>
+                                <div class="club d-flex align-items-center gap-2">
+                                    <span class="club-name text-primary fw-bold">{{ match.club2.nom|upper }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </section>
+
+        {# Section Résultats des matchs du jour - Right side #}
+        <section class="resultats-du-jour col-12 col-lg-6" style="flex: 1; max-width: 50%;">
+            <h2 class="mb-4 fw-semibold text-center text-black" style="margin-top: 20px;">Résultats du jour</h2>
+            {% if matchsResultats is empty %}
+                <p class="text-center text-muted fs-5">Aucun résultat disponible.</p>
+            {% else %}
+                <div class="result-list" style="height: 100%; display: flex; flex-direction: column;">
+                    {% for match in matchsResultats %}
+                        <div class="result-item d-flex align-items-center justify-content-between shadow p-3 mb-3 bg-white rounded" style="flex-grow: 1;">
+                            <div class="club d-flex align-items-center gap-2">
+                                <span class="club-name text-primary fw-bold">{{ match.club1.nom|upper }}</span>
+                            </div>
+                            <div class="score-box bg-success text-white rounded px-3 py-1 fw-bold">
+                                {{ match.scoreclub1 }} - {{ match.scoreclub2 }}
+                            </div>
+                            <div class="club d-flex align-items-center gap-2">
+                                <span class="club-name text-primary fw-bold">{{ match.club2.nom|upper }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </section>
+    </div>
+</div>
+
+<style>
+    /* Matchs à venir styles */
+    .match-list {
+        background: #0a1a4d;
+        padding: 20px;
+        border-radius: 15px;
+    }
+    .match-item {
+        background: linear-gradient(90deg, #ffffff 0%, #f0f0f0 100%);
+        border-radius: 30px;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .match-date {
+        background: #1a237e;
+        padding: 5px 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+    }
+    .match-content {
+        position: relative;
+        background: #ffffff;
+        border-radius: 30px;
+        padding: 10px 30px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        justify-content: space-between;
+    }
+    .club {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #000;
+    }
+    .club-name {
+        text-transform: uppercase;
+    }
+    .club-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        border-radius: 50%;
+        background: #fff;
+        padding: 2px;
+    }
+    .vs-box {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: #d32f2f;
+        color: #fff;
+        font-weight: 900;
+        font-size: 1.5rem;
+        padding: 10px 25px;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        z-index: 10;
+    }
+
+    /* Résultats styles */
+    .result-list {
+        background: #a52a2a;
+        padding: 20px;
+        border-radius: 15px;
+    }
+    .result-item {
+        background: linear-gradient(90deg, #e0e0e0 0%, #f8f8f8 100%);
+        border-radius: 15px;
+        margin-bottom: 15px;
+        padding: 10px 20px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #000;
+        justify-content: space-between;
+    }
+    .score-box {
+        background: #2f2f2f;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 10px;
+        font-weight: 900;
+        font-size: 1.3rem;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+</style>
+{% endblock %}

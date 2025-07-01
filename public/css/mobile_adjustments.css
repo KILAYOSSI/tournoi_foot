@@ -1,0 +1,60 @@
+/* Styles spécifiques pour l'affichage mobile */
+
+/* Ne pas modifier l'image sous la navbar sur desktop, garder l'affichage actuel */
+/* Appliquer les styles uniquement sur mobile */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 300px;
+        background-position: center center;
+        background-size: contain;
+    }
+    .hero-section .btn {
+        margin-right: 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 1rem;
+    }
+}
+
+/* Tableau classement par poule : rendre scrollable horizontalement */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Forcer le tableau à ne pas couper les colonnes sur mobile */
+.table-classement {
+    table-layout: auto;
+    width: 100%;
+}
+
+/* Réduction de la taille des colonnes du tableau classement */
+.table-classement th,
+.table-classement td {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+    white-space: nowrap;
+}
+
+/* Page calendrier : partie matchs du jour et résultats */
+.matchs-du-jour-container,
+.resultats-du-jour-container {
+    padding: 0 10px;
+    overflow-x: auto;
+}
+
+/* Pour éviter que les éléments débordent */
+.container,
+.container-fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Media query pour écrans max 768px (tablettes et mobiles) */
+@media (max-width: 768px) {
+    .table-classement th,
+    .table-classement td {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.4rem;
+    }
+}

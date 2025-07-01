@@ -1,3 +1,0 @@
-cartons:
-    path: /cartons
-    controller: App\Controller\CartonsController::index

@@ -1,0 +1,18 @@
+/* Correction des sélecteurs .navbar-menu en .navbar-nav pour cohérence avec Bootstrap */
+
+.navbar-nav {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column;
+    /* Quand menu actif, on le fait glisser */
+    }
+    .navbar-nav.show {
+        right: 0;
+    }
+    .navbar-nav li {
+        margin: 10px 0;
+    }
+}

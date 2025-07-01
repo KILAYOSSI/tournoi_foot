@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendrier des matchs{% endblock %}
+
+{% block body %}
+<div class="container my-5 text-black" style="background-image: url('/assets/images/football-background.jpg'); background-size: cover; background-position: center; border-radius: 15px; padding: 30px;">
+    <h1 class="text-center mb-5 fw-bold" style="margin-top: 20px;">Calendrier des matchs</h1>
+
+    <div class="text-center mb-4">
+        <a href="{{ path('calendrier_export_pdf') }}" class="btn btn-danger">Exporter en PDF</a>
+    </div>
+
+  <div class="matchday">
+    <h1>MATCHDAY 1</h1>
+    <h2>22 - 24 AOÛT 2025</h2>
+  </div>
+
+  <div class="match-list">
+    {% for match in matchsAVenir %}
+      <div class="match">
+        <div class="team">{{ match.club1.nom|upper }}</div>
+        <div class="vs">VS</div>
+        <div class="team">{{ match.club2.nom|upper }}</div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="footer">FOOTBALL AS IT’S MEANT TO BE</div>
+</div>
+</div>
+
+<style>
+    /* Matchs à venir styles */
+    .match-list {
+        background: #0a1a4d;
+        padding: 20px;
+        border-radius: 15px;
+    }
+    .match-item {
+        background: linear-gradient(90deg, #ffffff 0%, #f0f0f0 100%);
+        border-radius: 30px;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .match-date {
+        background: #1a237e;
+        padding: 5px 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+    }
+    .match-content {
+        position: relative;
+        background: #ffffff;
+        border-radius: 30px;
+        padding: 10px 30px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        justify-content: space-between;
+    }
+    .club {
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #000;
+    }
+    .club-name {
+        text-transform: uppercase;
+    }
+    .club-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        border-radius: 50%;
+        background: #fff;
+        padding: 2px;
+    }
+    .vs-box {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: #d32f2f;
+        color: #fff;
+        font-weight: 900;
+        font-size: 1.5rem;
+        padding: 10px 25px;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        z-index: 10;
+    }
+
+    /* Résultats styles */
+    .result-list {
+        background: #a52a2a;
+        padding: 20px;
+        border-radius: 15px;
+    }
+    .result-item {
+        background: linear-gradient(90deg, #e0e0e0 0%, #f8f8f8 100%);
+        border-radius: 15px;
+        margin-bottom: 15px;
+        padding: 10px 20px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #000;
+        justify-content: space-between;
+    }
+    .score-box {
+        background: #2f2f2f;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 10px;
+        font-weight: 900;
+        font-size: 1.3rem;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Tournoi de Football Inter-Village{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <div class="banner rounded overflow-hidden position-relative mb-5" style="height: 300px; overflow: hidden; border-radius: 0.5rem; position: relative;">
+        <img src="{{ asset('/assets/WhatsApp Image 2025-06-02 à 13.08.20_429779f6.jpg') }}" alt="Image tournoi" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
+        <h1 class="text-white display-4 fw-bold position-absolute top-50 start-50 translate-middle" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">TOURNOI DUO ROMEO EUGENE</h1>
+    </div>
+
+    <section class="mb-5">
+        <h2 class="mb-4">À PROPOS</h2>
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <div class="mb-3 d-flex justify-content-center align-items-center" style="font-size: 30px;">
+                        <span style="border: 2px solid black; border-radius: 50%; width: 30px; height: 30px; display: inline-block;"></span>
+                    </div>
+                    <h5 class="fw-bold">DES ÉQUIPES</h5>
+                    <p>Un tournoi avec de nombreuses équipes</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <div class="mb-3 d-flex flex-column justify-content-center align-items-center" style="font-size: 30px; gap: 6px;">
+                        <div style="width: 25px; height: 3px; background-color: black;"></div>
+                        <div style="width: 25px; height: 3px; background-color: black;"></div>
+                        <div style="width: 25px; height: 3px; background-color: black;"></div>
+                    </div>
+                    <h5 class="fw-bold">PHASES FINALES</h5>
+                    <p>Un système de qualification compétitif</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <div class="mb-3 d-flex justify-content-center align-items-center" style="font-size: 30px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <h5 class="fw-bold">MATCHS PASSIONNANTS</h5>
+                    <p>Des rencontres riches en émotions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="mb-4">STATISTIQUES</h2>
+        <div class="row text-center g-4">
+            <div class="col-md-3">
+                <div class="stat-card p-4 rounded shadow-sm bg-light">
+                    <h3 class="fw-bold">{{ clubsCount }}</h3>
+                    <p>CLUBS</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card p-4 rounded shadow-sm bg-light">
+                    <h3 class="fw-bold">{{ matchsCount }}</h3>
+                    <p>MATCHS</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card p-4 rounded shadow-sm bg-light">
+                    <h3 class="fw-bold">{{ butsCount }}</h3>
+                    <p>BUTS MARQUÉS</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card p-4 rounded shadow-sm bg-light">
+                    <h3 class="fw-bold">{{ statistiquesCount }}</h3>
+                    <p>STATISTIQUES</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="mb-4">Informations Tournoi</h2>
+        <div class="p-4 rounded shadow-sm bg-light">
+            <h5>Prix de participation des équipes</h5>
+            <p>Chaque équipe doit payer un montant de <strong>50 000 FCFA</strong> pour participer au tournoi.</p>
+            <h5>Règle du jeu</h5>
+            <p>Le tournoi se déroule en phases de poules suivies d'une phase finale à élimination directe. Chaque match dure 90 minutes, avec prolongations et tirs au but en cas d'égalité.</p>
+            <h5>Prix des cartons et sanctions</h5>
+            <ul>
+                <li>Carton jaune : Avertissement</li>
+                <li>Carton rouge : Expulsion immédiate du joueur</li>
+                <li>Accumulation de 3 cartons jaunes : Suspension d'un match</li>
+                <li>Comportement antisportif : Sanctions disciplinaires pouvant aller jusqu'à l'exclusion du tournoi</li>
+            </ul>
+        </div>
+    </section>
+</div>
+{% endblock %}

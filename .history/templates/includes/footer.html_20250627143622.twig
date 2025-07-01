@@ -1,0 +1,50 @@
+<footer style="background-color:#002147; color:white; font-family:Arial, sans-serif; padding:40px 20px 20px 20px;">
+    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; max-width:1200px; margin:auto;">
+
+        <!-- Logo & Nom -->
+        <div style="flex:1; min-width:200px; margin-bottom:20px;">
+            <h2 style="color:white;">Duo Eugène.com</h2>
+            <p style="line-height:1.5;">© 2025 Tous droits réservés.</p>
+        </div>
+
+        <!-- Liens principaux -->
+        <div style="flex:1; min-width:200px; margin-bottom:20px;">
+            <h4>Navigation</h4>
+            <ul style="list-style:none; padding:0;">
+                <li><a href="{{ path('about') }}" style="color:white; text-decoration:none;">À propos</a></li>
+                <li><a href="{{ path('home') }}" style="color:white; text-decoration:none;">Accueil</a></li>
+                <li><a href="{{ path('match_du_jour') }}" style="color:white; text-decoration:none;">Match jour</a></li>
+                <li><a href="{{ path('statistiques') }}" style="color:white; text-decoration:none;">Statistiques</a></li>
+                <li><a href="{{ path('calendrier') }}" style="color:white; text-decoration:none;">Calendrier</a></li>
+                <li><a href="{{ path('clubs_joueurs') }}" style="color:white; text-decoration:none;">Clubs & joueurs</a></li>
+                <li><a href="#" style="color:white; text-decoration:none;">Gestion des compétitions</a></li>
+            </ul>
+        </div>
+
+        <!-- Réseaux sociaux -->
+        <div style="flex:1; min-width:200px; margin-bottom:20px;">
+            <h4>Suivez-nous sur</h4>
+            <p>
+                <a href="#" style="color:white; margin-right:10px;">WhatsApp</a>
+                <a href="#" style="color:white; margin-right:10px;">Facebook</a>
+                <a href="#" style="color:white;">TikTok</a>
+            </p>
+
+            <h4>Langue</h4>
+            <select style="padding:5px; border-radius:5px;">
+                <option value="fr">Français</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+    </div>
+
+    <hr style="margin:30px auto; width:90%; border-color:#ccc;">
+
+    <!-- Conditions légales -->
+    <div style="text-align:center; font-size:14px;">
+        <a href="{{ path('conditions') }}" style="color:white; margin:0 10px; text-decoration:none;">Conditions d'utilisation</a>
+        <a href="{{ path('confidentialite') }}" style="color:white; margin:0 10px; text-decoration:none;">Politique de confidentialité</a>
+        <a href="{{ path('cookies') }}" style="color:white; margin:0 10px; text-decoration:none;">Politique de cookies</a>
+        <a href="{{ path('parametres') }}" style="color:white; margin:0 10px; text-decoration:none;">Paramètres des cookies</a>
+    </div>
+</footer>

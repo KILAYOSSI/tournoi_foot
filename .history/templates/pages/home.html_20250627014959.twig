@@ -1,0 +1,200 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Tournoi de Football Inter-Village{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <section class="hero-section position-relative rounded overflow-hidden mb-5" style="height: 400px; border-radius: 0.5rem; background: url('{{ asset('assets/WhatsApp Image 2025-06-25 à 09.55.04_cf4f687a.jpg') }}') center center / cover no-repeat;">
+        <div class="overlay position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0, 0, 0, 0.5);"></div>
+        <div class="hero-content position-relative h-100 d-flex flex-column justify-content-end align-items-center text-white text-center px-3">
+            <a href="{{ path('about') }}" class="btn btn-outline-light btn-lg rounded-pill" style="font-weight: 700; letter-spacing: 0.1em; margin-right: 1010px; margin-top: -10px; margin-bottom: 10px;">En savoir plus</a>
+            <div class="ticker-container mt-3 w-100" style="position: relative; background-color: rgba(255, 255, 255, 0.8); height: 40px; margin-top: 10px;">
+                <div class="ticker-text">
+                    Le prix de participation du tournoi est de 12000 FCFA. &nbsp;&nbsp;&nbsp;
+                    Chaque équipe doit respecter les règles du jeu. &nbsp;&nbsp;&nbsp;
+                    Les matchs durent 90 minutes avec prolongations si nécessaire. &nbsp;&nbsp;&nbsp;
+                    Les cartons jaunes et rouges sont strictement appliqués. &nbsp;&nbsp;&nbsp;
+                    Le fair-play est essentiel pour le bon déroulement du tournoi. &nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="icons-container mt-3">
+        <div class="d-flex justify-content-center gap-5 flex-wrap text-center">
+            <a href="{{ path('clubs_joueurs') }}" class="icon-text text-decoration-none text-dark" style="max-width: 200px;">
+                <img src="{{ asset('assets/WhatsApp Image 2025-06-26 à 22.33.43_6d2c76fa.jpg') }}" alt="Icone 1" class="img-fluid mb-3" style="max-height: 150px; object-fit: contain;">
+                <h5 class="mb-3">DES ÉQUIPES</h5>
+                <p>
+                    Chaque pas vers l'avant est une victoire sur soi-même.<br>
+                    La persévérance forge le caractère et ouvre les portes du succès.<br>
+                    Crois en tes rêves, ils sont le moteur de ta destinée.<br>
+                    L'effort d'aujourd'hui construit la force de demain.<br>
+                    Ensemble, nous sommes plus forts et invincibles.
+                </p>
+            </a>
+            <a href="{{ path('phase_qualificative') }}" class="icon-text text-decoration-none text-dark" style="max-width: 200px;">
+                <img src="{{ asset('assets/WhatsApp Image 2025-06-26 à 22.33.43_91d2cb3c.jpg') }}" alt="Icone 2" class="img-fluid mb-3" style="max-height: 150px; object-fit: contain;">
+                <h5 class="mb-3">PHASE QUALIFICATIVE</h5>
+                <p>
+                    La passion est la flamme qui éclaire notre chemin.<br>
+                    Chaque défi est une opportunité de grandir.<br>
+                    Le courage ne connaît pas de limites.<br>
+                    Rêve grand, travaille dur, reste humble.<br>
+                    Le succès appartient à ceux qui osent.
+                </p>
+            </a>
+            <a href="{{ path('phase_finale') }}" class="icon-text text-decoration-none text-dark" style="max-width: 200px;">
+                <img src="{{ asset('assets/WhatsApp Image 2025-06-26 à 22.33.45_8dd9a1c0.jpg') }}" alt="Icone 3" class="img-fluid mb-3" style="max-height: 150px; object-fit: contain;">
+                 <h5 class="mb-3">PHASES FINALES</h5>
+                <p>
+                    La détermination transforme les obstacles en opportunités.<br>
+                    Chaque effort compte dans la quête de l'excellence.<br>
+                    La discipline est la clé de la réussite durable.<br>
+                    Ne jamais abandonner, toujours avancer.<br>
+                    Le chemin est long, mais la récompense est immense.
+                </p>
+            </a>
+            <a href="{{ path('calendrier') }}" class="icon-text text-decoration-none text-dark" style="max-width: 200px;">
+                <img src="{{ asset('assets/WhatsApp Image 2025-06-25 à 00.20.17_b34a09f6.jpg') }}" alt="Icone 4" class="img-fluid mb-3" style="max-height: 150px; object-fit: contain;">
+                 <h5 class="mb-3">MATCHS PASSIONNANTS</h5>
+                <p>
+                    L'unité fait la force de toute équipe.<br>
+                    Ensemble, nous surmontons tous les défis.<br>
+                    Le respect et l'esprit sportif guident nos actions.<br>
+                    Chaque victoire est le fruit d'un travail collectif.<br>
+                    Continuons à avancer, main dans la main.
+                </p>
+            </a>
+        </div>
+    </div>
+    <section id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="7000" style="height: 100vh; overflow: hidden;">
+        <div class="carousel-inner h-100">
+            <div class="carousel-item active carousel-item" style="background: url('{{ asset('assets/WhatsApp Image 2025-06-02 à 13.04.58_57d057cd.jpg') }}') center center / cover no-repeat; height: 100vh; position: relative; animation: kenBurnsZoom 20s ease-in-out infinite;">
+                <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100 text-center text-white" style="bottom: 20%;">
+                    <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Vivez la passion du football</h1>
+                    <p class="lead animate__animated animate__fadeInUp">Rejoignez-nous pour un tournoi inoubliable</p>
+                    <a href="{{ path('clubs_joueurs') }}" class="btn btn-primary btn-lg mt-3 animate__animated animate__fadeInUp">Découvrir les équipes</a>
+                </div>
+            </div>
+            <div class="carousel-item carousel-item" style="background: url('{{ asset('assets/WhatsApp Image 2025-06-26 à 02.39.00_f792be52.jpg') }}') center center / cover no-repeat; height: 100vh; position: relative; animation: kenBurnsZoom 20s ease-in-out infinite;">
+                <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100 text-center text-white" style="bottom: 20%;">
+                    <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">L'esprit d'équipe avant tout</h1>
+                    <p class="lead animate__animated animate__fadeInUp">Un tournoi qui rassemble les passionnés</p>
+                    <a href="{{ path('phase_qualificative') }}" class="btn btn-danger btn-lg mt-3 animate__animated animate__fadeInUp">Voir la phase qualificative</a>
+                </div>
+            </div>
+            <div class="carousel-item carousel-item" style="background: url('{{ asset('assets/WhatsApp Image 2025-06-26 à 22.33.44_536a08b8.jpg') }}') center center / cover no-repeat; height: 100vh; position: relative; animation: kenBurnsZoom 20s ease-in-out infinite;">
+                <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100 text-center text-white" style="bottom: 20%;">
+                    <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Vivez l'émotion des phases finales</h1>
+                    <p class="lead animate__animated animate__fadeInUp">Des matchs intenses et passionnants</p>
+                    <a href="{{ path('phase_finale') }}" class="btn btn-success btn-lg mt-3 animate__animated animate__fadeInUp">Voir les phases finales</a>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" style="width: 5%;">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" style="width: 5%;">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Suivant</span>
+        </button>
+    </section>
+
+    <style>
+        @keyframes kenBurnsZoom {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+            50% {
+                transform: scale(1.1) translate(10px, 10px);
+            }
+            100% {
+                transform: scale(1) translate(0, 0);
+            }
+        }
+        .carousel-item {
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .carousel-caption {
+            bottom: 20%;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 40px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+        @media (max-width: 768px) {
+            .carousel-caption h1 {
+                font-size: 1.8rem;
+            }
+            .carousel-caption p {
+                font-size: 1rem;
+            }
+            .carousel-caption .btn {
+                font-size: 0.9rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+
+
+    
+
+    <section>
+        <h2 class="mb-4">STATISTIQUES</h2>
+        <div class="row text-center g-4">
+            <div class="col-md-3">
+                <div class="stat-card p-4 rounded shadow-sm bg-light number-font number-animated number-test">
+                    <h3 class="fw-bold">{{ clubsCount }}</h3>
+                    <p>CLUBS</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card p-4 rounded shadow-sm bg-light number-font number-animated number-test">
+                    <h3 class="fw-bold">{{ matchsCount }}</h3>
+                    <p>MATCHS</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card p-4 rounded shadow-sm bg-light number-font number-animated number-test">
+                    <h3 class="fw-bold">{{ butsCount }}</h3>
+                    <p>BUTS MARQUÉS</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card p-4 rounded shadow-sm bg-light number-font number-animated number-test">
+                    <h3 class="fw-bold">{{ statistiquesCount }}</h3>
+                    <p>STATISTIQUES</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <h2 class="mb-4">Informations Tournoi</h2>
+        <div class="p-4 rounded shadow-sm bg-light">
+            <h5>Prix de participation des équipes</h5>
+            <p>Chaque équipe doit payer un montant de <strong>12000 FCFA</strong> pour participer au tournoi.</p>
+            <h5>Règle du jeu</h5>
+            <p>Le tournoi se déroule en phases de poules suivies d'une phase finale à élimination directe. Chaque match dure 90 minutes, et tirs au but en cas d'égalité.</p>
+            <h5>Prix des cartons et sanctions</h5>
+            <ul>
+                <li>Carton jaune : Avertissement</li>
+                <li>Carton rouge : Expulsion immédiate du joueur</li>
+                <li>Accumulation de 3 cartons jaunes : Suspension d'un match</li>
+                <li>Comportement antisportif : Sanctions disciplinaires pouvant aller jusqu'à l'exclusion du tournoi</li>
+            </ul>
+        </div>
+    </section>
+</div>
+{% endblock %}

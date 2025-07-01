@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Phase Qualificative - Tournoi{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h1 class="text-center mb-4" style="font-family: 'Georgia', serif; color: #b03a2e;">Phase Qualificative - Arbre de Qualification</h1>
+    <div class="qualification-tree p-4 rounded shadow-sm bg-light" style="font-family: 'Georgia', serif; color: #5a3e36;">
+
+        <h3 class="mb-3" style="text-decoration: underline;">Quart de finale</h3>
+        <div class="row mb-4 justify-content-center">
+            <div class="col-4 text-center border rounded p-3 mx-2" style="background-color: #f8e9e7;">
+                <strong>1er Poule A</strong> # <strong>2ème Poule B</strong><br>14h
+            </div>
+            <div class="col-4 text-center border rounded p-3 mx-2" style="background-color: #f8e9e7;">
+                <strong>2ème Poule A</strong> # <strong>1er Poule B</strong><br>16h
+            </div>
+        </div>
+
+        <h3 class="mb-3" style="text-decoration: underline;">Demi finale</h3>
+        <div class="row mb-4 justify-content-center">
+            <div class="col-4 text-center border rounded p-3 mx-2" style="background-color: #f0d6d5;">
+                <strong>1er Vainqueur</strong> # <strong>3ème Vainqueur</strong><br>14h
+            </div>
+            <div class="col-4 text-center border rounded p-3 mx-2" style="background-color: #f0d6d5;">
+                <strong>2ème Vainqueur</strong> # <strong>4ème Vainqueur</strong><br>16h
+            </div>
+        </div>
+
+        <h3 class="mb-3" style="text-decoration: underline;">Finale</h3>
+        <div class="row justify-content-center">
+            <div class="col-4 text-center border rounded p-3 mx-2" style="background-color: #e8b8b5;">
+                <strong>1er Vainqueur</strong> # <strong>2ème Vainqueur</strong>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
