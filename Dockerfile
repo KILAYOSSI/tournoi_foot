@@ -1,6 +1,6 @@
 # Dockerfile pour projet Symfony avec PHP 8.2, Apache, Composer et extensions nécessaires
 
-FROM php:8.2-apache
+FROM php:8.1-apache
 
 # Installer les dépendances système nécessaires et les extensions PHP requises
 RUN apt-get update && apt-get install -y \
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     && a2enmod rewrite
 
 # Installer Composer globalement
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.5-php8.1 /usr/bin/composer /usr/bin/composer
 
 # Définir le répertoire de travail
 WORKDIR /var/www/html
