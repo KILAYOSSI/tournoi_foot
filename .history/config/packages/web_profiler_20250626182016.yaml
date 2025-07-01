@@ -1,8 +1,7 @@
 when@dev:
-# Disabled web_profiler configuration to avoid errors due to missing WebProfilerBundle
-# web_profiler:
-#     toolbar: true
-#     intercept_redirects: false
+    web_profiler:
+        toolbar: true
+        intercept_redirects: false
 
     framework:
         profiler: { only_exceptions: false }

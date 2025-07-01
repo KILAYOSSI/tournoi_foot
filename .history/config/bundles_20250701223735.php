@@ -14,7 +14,6 @@ return [
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
     // Disabled MakerBundle to avoid class not found error in production or no-dev environment
     // Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
-    // Disabled DoctrineFixturesBundle to avoid class not found error in production or no-dev environment
-    // Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
+    Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
 ];

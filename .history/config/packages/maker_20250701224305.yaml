@@ -1,0 +1,3 @@
+# Disabled maker configuration to avoid errors due to missing MakerBundle
+# maker:
+#     some_configuration: value

@@ -1,0 +1,13 @@
+services:
+- type: web
+  name: symfony-app
+  env: docker
+  dockerfilePath: ./dockerfile
+  envVars:
+    - key: APP_ENV
+      value: prod
+    - key: APP_DEBUG
+      value: "false"
+    - key: DATABASE_URL
+      value: "mysql://root:@127.0.0.1:3306/gametournoi?serverVersion=8.0.31"
+  plan: free

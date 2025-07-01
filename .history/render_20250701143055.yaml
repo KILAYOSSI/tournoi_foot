@@ -1,0 +1,19 @@
+
+services:
+  - type: web
+    name: tournoi-foot-symfony
+    env: php
+    plan: free
+    buildCommand: composer install --no-dev --optimize-autoloader
+    startCommand: php -S 0.0.0.0:10000 -t public
+    envVars:
+      - key: APP_ENV
+        value: prod
+      - key: 1234?
+        value: 'MaValeurSecreteChangezLa123!'
+      # - key: DATABASE_URL
+      #   value: 'mysql://user:password@host:port/dbname'
+        DATABASE_URL="mysql://root:@127.0.0.1:3306/gametournoi?serverVersion=8.0.31"
+    autoDeploy: true
+    branch: main
+    rootDir: .

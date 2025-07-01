@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: symfony-app
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: prod
+      - key: APP_DEBUG
+        value: "false"
+    plan: free
