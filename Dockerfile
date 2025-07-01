@@ -1,35 +1,34 @@
-# Utiliser une image PHP officielle avec Apache
-FROM php:8.1-apache
+# Dockerfile pour projet Symfony avec PHP 8.2, Apache, Composer et extensions nécessaires
 
-# Installer les extensions PHP nécessaires pour Symfony
+FROM php:8.2-apache
+
+# Installer les dépendances système nécessaires et les extensions PHP requises
 RUN apt-get update && apt-get install -y \
     libicu-dev \
-    libonig-dev \
     libzip-dev \
+    zip \
     unzip \
     git \
-    && docker-php-ext-install intl pdo pdo_mysql zip opcache
+    && docker-php-ext-install intl pdo_mysql zip \
+    && a2enmod rewrite
 
-# Activer le module Apache rewrite
-RUN a2enmod rewrite
-
-# Copier le code source dans le conteneur
-COPY . /var/www/html/
+# Installer Composer globalement
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Définir le répertoire de travail
 WORKDIR /var/www/html
 
-# Installer Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Copier les fichiers du projet dans le conteneur
+COPY . /var/www/html
 
-# Installer les dépendances PHP sans les dev
-RUN composer install --no-dev --optimize-autoloader
+# Installer les dépendances PHP avec Composer en mode production
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Donner les droits nécessaires au dossier var et public
-RUN chown -R www-data:www-data /var/www/html/var /var/www/html/public
+# Donner les droits nécessaires au dossier var et vendor pour Apache
+RUN chown -R www-data:www-data /var/www/html/var /var/www/html/vendor
 
-# Exposer le port 80
+# Exposer le port 80 pour Apache
 EXPOSE 80
 
-# Commande pour démarrer Apache en mode premier plan
+# Commande par défaut pour démarrer Apache en mode premier plan
 CMD ["apache2-foreground"]
