@@ -1,0 +1,373 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos - Tournoi Inter-Village{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a2342;
+            color: #fff;
+        }
+        a {
+            color: #00bcd4;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: white;
+        }
+        h2 {
+            font-size: 1.8rem;
+            color: #00bcd4;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        /* Top blue bar with À propos */
+        .top-bar {
+            background-color: #004a99;
+            padding: 1rem 2rem;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+        }
+        /* Hero slider */
+        .hero-slider {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+        .hero-slide {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding-left: 3rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            background-repeat: no-repeat;
+        }
+        .hero-slide .btn-link {
+            margin-top: 1rem;
+            background-color: #00bcd4;
+            color: #002b5c;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .hero-slide .btn-link:hover {
+            background-color: #008ba3;
+            color: white;
+        }
+        /* Hero slider pagination dots */
+        .hero-pagination {
+            position: absolute;
+            bottom: 15px;
+            left: 3rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .hero-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+        .hero-dot.active {
+            background-color: white;
+        }
+        /* Notre travail en action */
+        .container-uefa {
+            max-width: 1140px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .section-title {
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        .work-action {
+            background-color: #002b5c;
+            padding: 1rem;
+            border-radius: 10px;
+            position: relative;
+        }
+        .swiper {
+            width: 100%;
+            padding-bottom: 2rem;
+        }
+        .swiper-slide {
+            background: #002b5c;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            text-align: left;
+            color: white;
+            padding: 0;
+            position: relative;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+        .slide-caption {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        /* Scroll arrows for swiper */
+        .swiper-button-next, .swiper-button-prev {
+            color: white;
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            margin-top: -15px;
+        }
+        /* Qui nous sommes */
+        .qui-nous-sommes {
+            background-color: #002b5c;
+            background-image: url('{{ asset("assets/uefa_logo_faint.png") }}');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 60%;
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            color: white;
+            max-width: 1140px;
+            margin: 2rem auto;
+            position: relative;
+        }
+        .qui-nous-sommes h2 {
+            color: #00bcd4;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .qui-nous-sommes p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-bottom: 1.5rem;
+        }
+        .qui-nous-sommes .btn-link {
+            background-color: #00bcd4;
+            color: #002b5c;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .qui-nous-sommes .btn-link:hover {
+            background-color: #008ba3;
+            color: white;
+        }
+        /* Comment nous travaillons */
+        .comment-nous-travaillons {
+            background-color: #d9e9f9;
+            padding: 2rem 1rem;
+            border-radius: 10px;
+            max-width: 1140px;
+            margin: 2rem auto;
+            color: #002b5c;
+        }
+        .cards {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+        .card {
+            min-width: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: white;
+        }
+        .card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+        }
+        .card-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 44, 92, 0.7);
+            color: #00bcd4;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 0 0 10px 10px;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cards {
+                flex-wrap: nowrap;
+            }
+            .card {
+                min-width: 80%;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="top-bar">À propos</div>
+
+    <div class="hero-slider">
+        <div class="hero-slide" style="background-image: url('{{ asset('assets/WhatsApp Image 2025-06-02 à 11.04.29_d613f6a9.jpg') }}');">
+            <div>
+                Nous réinvestissons 97,5% de nos revenus nets dans le football
+                <br/>
+                <a href="#" class="btn-link">En savoir plus</a>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('{{ asset('assets/WhatsApp Image 2025-06-02 à 12.54.58_8e41e871.jpg') }}'); display:none;">
+            <div>
+                Nous pensons que le football peut être une force positive pour tout le monde
+                <br/>
+                <a href="#" class="btn-link">En savoir plus</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-uefa">
+        <section class="work-action">
+            <h2 class="section-title">Notre travail en action</h2>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="{{ asset('assets/WhatsApp Image 2025-06-02 à 13.04.58_57d057cd.jpg') }}" alt="Lancement de la Tournée du trophée de l’EURO 2024 à Stuttgart" />
+                        <div class="slide-caption">Lancement de la Tournée du trophée de l’EURO 2024 à Stuttgart</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="{{ asset('assets/WhatsApp Image 2025-06-02 à 13.04.58_bef0e067.jpg') }}" alt="Une nouvelle exposition célèbre de grands moments de l'EURO" />
+                        <div class="slide-caption">Une nouvelle exposition célèbre de grands moments de l'EURO</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="{{ asset('assets/WhatsApp Image 2025-06-02 à 13.04.59_20d5f18b.jpg') }}" alt="Calendrier UEFA 2024" />
+                        <div class="slide-caption">Calendrier UEFA 2024</div>
+                    </div>
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <section class="qui-nous-sommes">
+            <h2>Qui nous sommes</h2>
+            <p>La plupart des gens savent que l'UEFA organise certaines des meilleures compétitions de football au monde. Mais saviez-vous que nous réinvestissons 97 % de nos recettes nettes dans le football européen ?</p>
+            <a href="#" class="btn-link">En savoir plus</a>
+        </section>
+
+        <section class="comment-nous-travaillons">
+            <h2>Comment nous travaillons</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-23 à 13.44.55_704b8a70.jpg') }}" alt="Congrès de l’UEFA" />
+                    <div class="card-title">Congrès de l’UEFA</div>
+                </div>
+                <div class="card">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-23 à 13.35.14_0ab9806b.jpg') }}" alt="Commissions et panels" />
+                    <div class="card-title">Commissions et panels</div>
+                </div>
+                <div class="card">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-23 à 13.44.55_704b8a70.jpg') }}" alt="Administration" />
+                    <div class="card-title">Administration</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Hero slider functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = [];
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'flex' : 'none';
+                dots[i].classList.toggle('active', i === index);
+            });
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            let next = (currentSlide + 1) % slides.length;
+            showSlide(next);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const pagination = document.createElement('div');
+            pagination.classList.add('hero-pagination');
+            document.querySelector('.hero-slider').appendChild(pagination);
+
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('hero-dot');
+                dot.addEventListener('click', () => showSlide(i));
+                pagination.appendChild(dot);
+                dots.push(dot);
+            });
+
+            showSlide(0);
+            setInterval(nextSlide, 5000);
+        });
+    </script>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.mySwiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            effect: 'slide',
+        });
+    </script>
+{% endblock %}

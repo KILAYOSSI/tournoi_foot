@@ -1,0 +1,31 @@
+about:
+    path: /about
+    controller: App\Controller\HomeController::about
+
+contact:
+    path: /contact
+    controller: App\Controller\HomeController::contact
+
+conditions:
+    path: /conditions
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: conditions.html.twig
+
+confidentialite:
+    path: /confidentialite
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: confidentialite.html.twig
+
+cookies:
+    path: /cookies
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: cookies.html.twig
+
+parametres:
+    path: /parametres
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: parametres.html.twig

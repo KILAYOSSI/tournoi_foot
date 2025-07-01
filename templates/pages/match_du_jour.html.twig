@@ -10,16 +10,18 @@
     <style>
         body {
             font-family: 'Poppins', 'Roboto', 'Inter', sans-serif;
-            background: linear-gradient(120deg, #0d1b2a 0%, #1b263b 100%);
+            background: url('{{ asset("assets/WhatsApp Image 2025-06-24 à 20.09.41_6bca5883.jpg") }}') no-repeat center center fixed;
+            background-size: cover;
             color: #e0e0e0;
         }
         .section-title {
             font-size: 2.5rem;
             font-weight: 700;
             letter-spacing: -1px;
+            margin-top: 20px;
             margin-bottom: 2rem;
-            color: #ffffff;
-            text-shadow: 0 0 10px #00ff00;
+            color: #000000;
+            text-shadow: none;
         }
         .match-card {
             background: linear-gradient(135deg, #16213e, #0f3460);
@@ -263,7 +265,7 @@
                 <div class="col-12 col-md-10 col-lg-8">
                     <div class="match-card d-flex flex-column flex-md-row align-items-center justify-content-between">
                         <div class="d-flex align-items-center mb-3 mb-md-0">
-                            <img src="{{ asset('images/teams/' ~ match.club1.logo) }}" alt="{{ match.club1.nom }}" class="team-logo me-3 shadow-sm" />
+                            <!--<img src="{{ asset('images/teams/' ~ match.club1.logo) }}" alt="{{ match.club1.nom }}" class="team-logo me-3 shadow-sm" />-->
                             <span class="team-name">{{ match.club1.nom }}</span>
                         </div>
                         <div class="text-center mx-3">
@@ -274,7 +276,7 @@
                         </div>
                         <div class="d-flex align-items-center mt-3 mt-md-0">
                         <span class="team-name me-3">{{ match.club2.nom }}</span>
-                        <img src="{{ asset('images/teams/' ~ match.club2.logo) }}" alt="{{ match.club2.nom }}" class="team-logo ms-2 shadow-sm" />
+                        <!--<img src="{{ asset('images/teams/' ~ match.club2.logo) }}" alt="{{ match.club2.nom }}" class="team-logo ms-2 shadow-sm" />-->
                         </div>
                     </div>
                 </div>
@@ -312,7 +314,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% set allPoules = ['Poule A', 'Poule B', 'Poule C', 'Poule D'] %}
+                            {% set allPoules = ['Poule A', 'Poule B', 'Poule C'] %}
                             {% for pouleNom in allPoules %}
                                 <h3 class="text-center mt-4 mb-3">Poule {{ pouleNom|replace({'Poule ': ''}) }}</h3>
                                 <table class="classement-table mt-3 mb-5">
@@ -350,7 +352,7 @@
                                                     <td>{{ equipe.rang }}</td>
                                                     <td class="club-cell">
                                                         {% if equipe.club.logo %}
-                                                            <img src="{{ asset('images/teams/' ~ equipe.club.logo) }}" alt="{{ equipe.club.nom }}" class="club-logo" />
+                                                            <!--<img src="{{ asset('images/teams/' ~ equipe.club.logo) }}" alt="{{ equipe.club.nom }}" class="club-logo" />-->
                                                         {% endif %}
                                                         {{ equipe.club.nom }}
                                                     </td>
@@ -394,15 +396,15 @@
                     <div class="col-12 col-md-10 col-lg-8">
                         <div class="match-card d-flex flex-column flex-md-row align-items-center justify-content-between bg-light">
                             <div class="d-flex align-items-center mb-3 mb-md-0">
-                                <img src="{{ asset('images/teams/' ~ rencontre.club1.logo) }}" alt="{{ rencontre.club1.nom }}" class="team-logo me-3" />
+                                <!--<img src="{{ asset('images/teams/' ~ rencontre.club1.logo) }}" alt="{{ rencontre.club1.nom }}" class="team-logo me-3" />-->
                                 <span class="team-name">{{ rencontre.club1.nom }}</span>
                             </div>
-                            <div class="score text-center mx-3">
+                            <div class="score text-center mx-3 number-font">
                                 {{ rencontre.scoreclub1 }} <span class="text-muted">-</span> {{ rencontre.scoreclub2 }}
                             </div>
                             <div class="d-flex align-items-center mt-3 mt-md-0">
                                 <span class="team-name me-3">{{ rencontre.club2.nom }}</span>
-                                <img src="{{ asset('images/teams/' ~ rencontre.club2.logo) }}" alt="{{ rencontre.club2.nom }}" class="team-logo ms-2" />
+                                <!--<img src="{{ asset('images/teams/' ~ rencontre.club2.logo) }}" alt="{{ rencontre.club2.nom }}" class="team-logo ms-2" />-->
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,314 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qui sommes-nous ?{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+    <style>
+        /* Styles spécifiques pour la page Qui sommes-nous inspirée du site UEFA */
+
+        .hero-section {
+            background: linear-gradient(135deg, #0052d4, #4364f7, #6fb1fc);
+            color: white;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0052d4;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .values-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+            color: #333;
+        }
+
+        .value-item {
+            flex: 1 1 250px;
+            background: #f0f4ff;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,82,212,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .value-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 24px rgba(0,82,212,0.3);
+        }
+
+        .value-item h3 {
+            color: #0052d4;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        /* Swiper styles */
+
+        .swiper {
+            width: 100%;
+            padding-bottom: 3rem;
+        }
+
+        .swiper-slide {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-member-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+            color: #0052d4;
+        }
+
+        .team-member-role {
+            font-style: italic;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Contact section */
+
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 350px;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .values-list {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <section class="hero-section">
+        <h1>Qui sommes-nous ?</h1>
+        <p>Bienvenue au Tournoi Inter-Village de Football, un événement qui célèbre la passion, la compétition et la fraternité entre nos villages.</p>
+    </section>
+
+    <section class="section">
+        <h2>Notre mission</h2>
+        <p style="max-width: 800px; margin: 0 auto 2rem; font-size: 1.2rem; text-align: center;">
+            Promouvoir le football amateur dans notre région en offrant un cadre organisé, convivial et compétitif où chaque village peut s'exprimer dans un esprit de fair-play et de fraternité.
+        </p>
+        <div class="values-list">
+            <div class="value-item">
+                <h3>Esprit d'équipe</h3>
+                <p>Favoriser la cohésion et la solidarité entre les joueurs et les villages.</p>
+            </div>
+            <div class="value-item">
+                <h3>Compétition saine</h3>
+                <p>Encourager un jeu respectueux et compétitif pour le plaisir de tous.</p>
+            </div>
+            <div class="value-item">
+                <h3>Engagement communautaire</h3>
+                <p>Impliquer les habitants dans la vie du tournoi et renforcer les liens sociaux.</p>
+            </div>
+            <div class="value-item">
+                <h3>Innovation</h3>
+                <p>Utiliser la technologie pour améliorer l'expérience des joueurs et des supporters.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Galerie</h2>
+        <!-- Swiper -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-02 à 13.04.59_6841458d.jpg') }}" alt="Tournoi image 1" />
+                    <p>Moments forts du tournoi</p>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-02 à 13.04.58_57d057cd.jpg') }}" alt="Tournoi image 2" />
+                    <p>Ambiance sur le terrain</p>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-02 à 13.04.58_bef0e067.jpg') }}" alt="Tournoi image 3" />
+                    <p>Supporters passionnés</p>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-02 à 13.08.20_429779f6.jpg') }}" alt="Tournoi image 4" />
+                    <p>Remise des trophées</p>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Notre équipe</h2>
+        <div class="swiper mySwiperTeam">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-23 à 13.44.55_704b8a70.jpg') }}" alt="Membre équipe 1" />
+                    <div class="team-member-name">Jean Dupont</div>
+                    <div class="team-member-role">Organisateur principal</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-23 à 13.35.14_0ab9806b.jpg') }}" alt="Membre équipe 2" />
+                    <div class="team-member-name">Marie Curie</div>
+                    <div class="team-member-role">Responsable communication</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-03 à 19.50.06_5b227b1f.jpg') }}" alt="Membre équipe 3" />
+                    <div class="team-member-name">Aliou Diallo</div>
+                    <div class="team-member-role">Coordinateur logistique</div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-03 à 19.50.06_d0034dc6.jpg') }}" alt="Membre équipe 4" />
+                    <div class="team-member-name">Fatou Ndiaye</div>
+                    <div class="team-member-role">Chargée des relations publiques</div>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <section class="section contact-section">
+        <h2>Contact & Localisation</h2>
+        <div class="contact-info">
+            <p><strong>Adresse :</strong> Terrain du Chef du Village, Djérègbé, Bénin</p>
+            <p><strong>Téléphone :</strong> +229 XX XX XX XX XX</p>
+            <p><strong>Email :</strong> contact@tournoidjeregbe.bj</p>
+            <p>Pour toute information complémentaire ou pour participer au tournoi, n'hésitez pas à nous contacter.</p>
+        </div>
+        <div class="map-container mt-4">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.1234567890123!2d2.123456789012345!3d6.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8f123456789%3A0x123456789abcdef!2sTerrain%20du%20Chef%20du%20Village%2C%20Dj%C3%A9r%C3%A9gb%C3%A9%2C%20B%C3%A9nin!5e0!3m2!1sfr!2s!4v1234567890123!5m2!1sfr!2s" 
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.mySwiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            effect: 'slide',
+        });
+
+        const swiperTeam = new Swiper('.mySwiperTeam', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                },
+                640: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+    </script>
+{% endblock %}

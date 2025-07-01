@@ -1,0 +1,130 @@
+/* Corrections globales pour éviter débordements et décalages sur mobile */
+
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+main {
+    max-width: 100%;
+    padding: 0 10px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+img, .img-tournoi {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+}
+
+.icons-container {
+    padding: 0 10px;
+    overflow-x: hidden;
+}
+
+/* Suppression marges fixes larges sur boutons et autres éléments */
+
+.btn-outline-light.btn-lg.rounded-pill {
+    margin: 10px auto;
+    display: block;
+    max-width: 200px;
+}
+
+/* Navbar menu overflow fix */
+
+.navbar-menu {
+    overflow-x: hidden;
+}
+
+/* Carousel fixes */
+
+.carousel-item {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Autres corrections spécifiques */
+
+.container-calendrier {
+    overflow-x: hidden;
+    max-width: 100%;
+    padding: 10px;
+}
+
+/* Media queries pour responsivité */
+
+@media (max-width: 768px) {
+    main {
+        padding: 0 5px;
+    }
+
+    .btn-outline-light.btn-lg.rounded-pill {
+        max-width: 100%;
+        margin: 10px 0;
+    }
+
+    .carousel-item {
+        height: auto;
+    }
+
+    .container-calendrier {
+        padding: 5px;
+    }
+
+    /* Correction menu violet responsive */
+
+    nav.navbar {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .navbar .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .navbar-nav > li > a.nav-link {
+        width: auto !important;
+        font-size: 1rem !important;
+        padding: 8px 10px !important;
+    }
+
+    .navbar-collapse {
+        background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+        padding: 10px 15px;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .navbar-toggler {
+        border: 1px solid #fff;
+    }
+
+    /* Réduire la largeur du menu déroulant sur mobile */
+    .dropdown-menu {
+        font-size: 1rem !important;
+        padding: 1rem !important;
+        border-radius: 0.5rem !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
+        max-width: 100% !important;
+        width: auto !important;
+    }
+
+    /* Centrer le contenu du menu */
+    .navbar-nav {
+        text-align: center;
+        width: 100%;
+    }
+
+    /* Ajuster les marges des éléments du menu */
+    .navbar-nav > li {
+        margin: 5px 0;
+    }
+
+    /* Correction image hero-section pour mobile */
+    .hero-section {
+        height: 300px !important;
+        background-position: center center !important;
+        background-size: contain !important;
+    }
+}

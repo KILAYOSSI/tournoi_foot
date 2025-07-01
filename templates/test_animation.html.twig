@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Test Animation Icônes</title>
+    <style>
+        body {
+            background-color: #0a2342;
+            color: white;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .icon-container {
+            display: flex;
+            gap: 3rem;
+        }
+        .feature-box {
+            text-align: center;
+            color: #ff4081;
+        }
+        .feature-box img {
+            width: 80px;
+            height: 80px;
+            animation: icon-glow 3s ease-in-out infinite alternate;
+        }
+        .feature-box p {
+            margin-top: 0.5rem;
+            font-weight: 700;
+            position: relative;
+            animation: va-et-vient-sophistique 4s ease-in-out infinite;
+            white-space: nowrap;
+            text-shadow:
+                0 0 5px #ff80ab,
+                0 0 10px #ff4081,
+                0 0 20px #e040fb,
+                0 0 30px #d500f9;
+        }
+        @keyframes va-et-vient-sophistique {
+            0%, 100% {
+                left: 0;
+                color: #ff4081;
+                text-shadow:
+                    0 0 5px #ff80ab,
+                    0 0 10px #ff4081,
+                    0 0 20px #e040fb,
+                    0 0 30px #d500f9;
+            }
+            50% {
+                left: 15px;
+                color: #e040fb;
+                text-shadow:
+                    0 0 10px #ea80fc,
+                    0 0 20px #d500f9,
+                    0 0 30px #aa00ff,
+                    0 0 40px #7c4dff;
+            }
+        }
+        @keyframes icon-glow {
+            0% {
+                filter: drop-shadow(0 0 5px #ff4081);
+            }
+            50% {
+                filter: drop-shadow(0 0 15px #d500f9);
+            }
+            100% {
+                filter: drop-shadow(0 0 5px #ff4081);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="icon-container">
+        <div class="feature-box">
+            <img src="{{ asset('assets/WhatsApp Image 2025-06-25 à 00.20.17_fab2d237.jpg') }}" alt="Football Icon" />
+            <p>Passion</p>
+        </div>
+        <div class="feature-box">
+            <img src="{{ asset('assets/WhatsApp Image 2025-06-25 à 00.20.16_561d9b70.jpg') }}" alt="Trophy Icon" />
+            <p>Excellence</p>
+        </div>
+        <div class="feature-box">
+            <img src="{{ asset('assets/WhatsApp Image 2025-06-25 à 00.20.17_b34a09f6.jpg') }}" alt="Community Icon" />
+            <p>Communauté</p>
+        </div>
+        <div class="feature-box">
+            <img src="{{ asset('assets/WhatsApp Image 2025-06-25 à 00.20.15_8faa6a73.jpg') }}" alt="Romance Icon" />
+            <p>Romantisme</p>
+        </div>
+    </div>
+</body>
+</html>

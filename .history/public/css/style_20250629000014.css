@@ -1,0 +1,12 @@
+list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+=======
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}

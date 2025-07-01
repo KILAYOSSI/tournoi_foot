@@ -1,0 +1,357 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos - Tournoi Inter-Village{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a2342;
+            color: #fff;
+        }
+        a {
+            color: #00bcd4;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #00bcd4;
+        }
+        h2 {
+            font-size: 2rem;
+            color: #002b5c;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            color: #222;
+        }
+        .hero {
+            position: relative;
+            background: url('{{ asset("assets/WhatsApp Image 2025-06-24 à 20.09.41_6bca5883.jpg") }}') center center/cover no-repeat;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+        .hero-text {
+            background-color: rgba(0, 44, 92, 0.7);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            max-width: 600px;
+        }
+        .container-uefa {
+            max-width: 1140px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background-color: #d9e9f9;
+            border-radius: 10px;
+            color: #002b5c;
+        }
+        /* Notre travail en action */
+        .section-title {
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #002b5c;
+        }
+        .swiper {
+            width: 100%;
+            padding-bottom: 2rem;
+        }
+        .swiper-slide {
+            background: #002b5c;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            text-align: left;
+            color: white;
+            padding: 0;
+            position: relative;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+        .slide-caption {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        /* Comment nous travaillons */
+        .cards {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+        .card {
+            min-width: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+        }
+        .card-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 44, 92, 0.7);
+            color: #00bcd4;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 0 0 10px 10px;
+        }
+        /* Avec qui nous travaillons */
+        .partners {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+        .partner-card {
+            min-width: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .partner-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+        }
+        .partner-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 44, 92, 0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 0 0 10px 10px;
+        }
+        /* Fondation UEFA */
+        .foundation-section {
+            background-color: #f9e26a;
+            color: #002b5c;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .foundation-section img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 1rem;
+            border-radius: 10px;
+        }
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #004a99;
+            font-weight: 700;
+            text-decoration: none;
+            border: 2px solid #004a99;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-top: 1rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .btn-link:hover {
+            background-color: #004a99;
+            color: white;
+        }
+        /* Autres informations */
+        .other-info {
+            background-color: #002b5c;
+            border-radius: 10px;
+            padding: 1rem;
+            color: white;
+        }
+        .info-button {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #003a75;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            color: white;
+            border: none;
+            width: 100%;
+            text-align: left;
+            transition: background-color 0.3s;
+        }
+        .info-button.active, .info-button:hover {
+            background-color: #00bcd4;
+            color: #002b5c;
+        }
+        .info-button svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #00bcd4;
+            color: #002b5c;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.2rem;
+            z-index: 1000;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cards, .partners {
+                flex-wrap: nowrap;
+            }
+            .card, .partner-card {
+                min-width: 80%;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="hero">
+        <div class="hero-text">
+            Nous pensons que le football peut être une force positive pour tout le monde
+            <br/>
+            <a href="#" class="btn-link">En savoir plus</a>
+        </div>
+    </div>
+
+    <div class="container-uefa">
+        <section>
+            <h2 class="section-title">Notre travail en action</h2>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="{{ asset('assets/WhatsApp Image 2025-06-07 à 11.37.40.jpg') }}" alt="Lancement de la Tournée du trophée de l’EURO 2024 à Stuttgart" />
+                        <div class="slide-caption">Lancement de la Tournée du trophée de l’EURO 2024 à Stuttgart</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="{{ asset('assets/WhatsApp Image 2025-06-07 à 11.37.40 - Copie.jpg') }}" alt="Une célébration mondiale" />
+                        <div class="slide-caption">Une célébration mondiale</div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Comment nous travaillons</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-23 à 13.44.55_704b8a70.jpg') }}" alt="Congrès de l’UEFA" />
+                    <div class="card-title">Congrès de l’UEFA</div>
+                </div>
+                <div class="card">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-23 à 13.35.14_0ab9806b.jpg') }}" alt="Commissions et panels" />
+                    <div class="card-title">Commissions et panels</div>
+                </div>
+                <div class="card">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-23 à 13.44.55_704b8a70.jpg') }}" alt="Administration" />
+                    <div class="card-title">Administration</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Avec qui nous travaillons</h2>
+            <div class="partners">
+                <div class="partner-card">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-23 à 13.44.55_704b8a70.jpg') }}" alt="Syndicats de joueurs et joueuses" />
+                    <div class="partner-title">Syndicats de joueurs et joueuses</div>
+                </div>
+                <div class="partner-card">
+                    <img src="{{ asset('assets/WhatsApp Image 2025-06-23 à 13.35.14_0ab9806b.jpg') }}" alt="Autre partenaire" />
+                    <div class="partner-title">Autre partenaire</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="foundation-section">
+            <h2>Fondation UEFA pour l’enfance</h2>
+            <p>La Fondation utilise le pouvoir du football pour offrir l’espoir d’un avenir meilleur à d’innombrables enfants vulnérables à travers le monde.</p>
+            <a href="#" class="btn-link">En savoir plus</a>
+            <img src="{{ asset('assets/WhatsApp Image 2025-06-02 à 13.08.20_429779f6.jpg') }}" alt="Fondation UEFA pour l’enfance" />
+        </section>
+
+        <section class="other-info">
+            <h2>Autres informations</h2>
+            <button class="info-button">Ce que nous faisons <svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"/></svg></button>
+            <button class="info-button active">Comment nous travaillons <svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"/></svg></button>
+            <button class="info-button">Nos parties prenantes <svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"/></svg></button>
+            <button class="info-button">Fondation UEFA pour l’enfance <svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"/></svg></button>
+            <button class="info-button">Notre histoire <svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v10z"/></svg></button>
+        </section>
+    </div>
+
+    <div class="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Haut">↑</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.mySwiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            effect: 'slide',
+        });
+    </script>
+{% endblock %}

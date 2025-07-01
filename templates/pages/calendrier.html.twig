@@ -3,154 +3,171 @@
 {% block title %}Calendrier des matchs{% endblock %}
 
 {% block body %}
-<div class="container my-5" style="background-image: url('/assets/images/football-background.jpg'); background-size: cover; background-position: center; border-radius: 15px; padding: 30px;">
-    <h1 class="text-center mb-5 fw-bold text-white" style="text-shadow: 2px 2px 4px #000;">Calendrier des matchs</h1>
-
-    <div class="text-center mb-4">
-        <a href="{{ path('calendrier_export_pdf') }}" class="btn btn-danger">Exporter en PDF</a>
-    </div>
-
-    <div class="row g-4">
-        {# Section Matchs à venir - Left side #}
-        <section class="matchs-a-venir col-12 col-lg-6">
-            <h2 class="mb-4 text-primary fw-semibold text-center text-white" style="text-shadow: 1px 1px 3px #000;">Matchs à venir</h2>
-            {% if matchsAVenir is empty %}
-                <p class="text-center text-muted fs-5">Aucun match à venir.</p>
-            {% else %}
-                <div class="match-list">
-                    {% for match in matchsAVenir %}
-                        <div class="match-item shadow p-3 mb-4 bg-white rounded">
-                            <div class="match-date text-center text-dark fw-bold">
-                                {{ match.date|date('l j F Y')|capitalize }} KICK-OFF AT {{ match.date|date('H:i') }} UK/ {{ match.date|date('H:i')|date_modify('+1 hour')|date('H:i') }} CET
-                            </div>
-                            <div class="match-content d-flex align-items-center justify-content-between">
-                                <div class="club d-flex align-items-center gap-2">
-                                    <span class="club-name text-primary fw-bold">{{ match.club1.nom|upper }}</span>
-                                </div>
-                                <div class="vs-box text-white fw-bold bg-danger rounded px-3 py-1">VS</div>
-                                <div class="club d-flex align-items-center gap-2">
-                                    <span class="club-name text-primary fw-bold">{{ match.club2.nom|upper }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        </section>
-
-        {# Section Résultats des matchs du jour - Right side #}
-        <section class="resultats-du-jour col-12 col-lg-6">
-            <h2 class="mb-4 text-primary fw-semibold text-center text-white" style="text-shadow: 1px 1px 3px #000;">Résultats du jour</h2>
-            {% if matchsResultats is empty %}
-                <p class="text-center text-muted fs-5">Aucun résultat disponible.</p>
-            {% else %}
-                <div class="result-list">
-                    {% for match in matchsResultats %}
-                        <div class="result-item d-flex align-items-center justify-content-between shadow p-3 mb-3 bg-white rounded">
-                            <div class="club d-flex align-items-center gap-2">
-                                <span class="club-name text-primary fw-bold">{{ match.club1.nom|upper }}</span>
-                            </div>
-                            <div class="score-box bg-success text-white rounded px-3 py-1 fw-bold">
-                                {{ match.scoreclub1 }} - {{ match.scoreclub2 }}
-                            </div>
-                            <div class="club d-flex align-items-center gap-2">
-                                <span class="club-name text-primary fw-bold">{{ match.club2.nom|upper }}</span>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        </section>
-    </div>
-</div>
-
 <style>
-    /* Matchs à venir styles */
-    .match-list {
-        background: #0a1a4d;
-        padding: 20px;
-        border-radius: 15px;
+    body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-size: cover;
+        font-family: 'Arial', sans-serif;
+        color: white;
     }
-    .match-item {
-        background: linear-gradient(90deg, #ffffff 0%, #f0f0f0 100%);
-        border-radius: 30px;
-        margin-bottom: 20px;
-        padding: 10px 20px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .match-date {
-        background: #1a237e;
-        padding: 5px 10px;
-        border-radius: 10px;
-        margin-bottom: 10px;
-        font-size: 0.9rem;
-    }
-    .match-content {
+    .container-calendrier {
+        min-height: 75vh;
+        width: 75vw;
+        max-width: 100vw;
+        display: block;
+        padding: 0;
+        box-sizing: border-box;
+        background: url('/assets/WhatsApp Image 2025-06-26 à 22.33.46_f06c66ca.jpg') no-repeat center center fixed !important;
+        background-size: cover !important;
+        margin: 0;
         position: relative;
-        background: #ffffff;
-        border-radius: 30px;
-        padding: 10px 30px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        justify-content: space-between;
-    }
-    .club {
         display: flex;
-        align-items: center;
-        font-weight: 700;
-        font-size: 1.1rem;
-        color: #000;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        margin-top: 56px; /* pour coller sous la navbar fixe */
     }
-    .club-name {
-        text-transform: uppercase;
-    }
-    .club-logo {
-        width: 40px;
-        height: 40px;
-        object-fit: contain;
-        border-radius: 50%;
-        background: #fff;
-        padding: 2px;
-    }
-    .vs-box {
+    .logo-bundesliga {
         position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        background: #d32f2f;
-        color: #fff;
-        font-weight: 900;
-        font-size: 1.5rem;
-        padding: 10px 25px;
-        border-radius: 20px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        top: 20px;
+        right: 20px;
+        width: 80px;
+        height: auto;
         z-index: 10;
     }
-
-    /* Résultats styles */
-    .result-list {
-        background: #a52a2a;
-        padding: 20px;
-        border-radius: 15px;
+    .matchday-title {
+        background-color: rgba(0, 0, 0, 0.85);
+        color: white;
+        font-weight: 900;
+        font-size: 2.2rem;
+        text-align: center;
+        padding: 15px 0;
+        margin-top: 70px;
+        margin-bottom: 10px;
+        letter-spacing: 3px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
     }
-    .result-item {
-        background: linear-gradient(90deg, #e0e0e0 0%, #f8f8f8 100%);
+    .match-date {
+        background-color: rgba(0, 0, 0, 0.85);
+        color: white;
+        font-weight: 900;
+        font-size: 1.4rem;
+        text-align: center;
+        padding: 10px 0;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .match-list {
+        width: 100%;
+        max-width: 600px;
+        background-color: rgba(0, 0, 0, 0.75);
         border-radius: 15px;
-        margin-bottom: 15px;
-        padding: 10px 20px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-        font-weight: 700;
-        font-size: 1.1rem;
-        color: #000;
+        padding: 20px 30px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.8);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .match-item {
+        display: flex;
         justify-content: space-between;
-    }
-    .score-box {
-        background: #2f2f2f;
-        color: #fff;
-        padding: 5px 15px;
-        border-radius: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.15);
         font-weight: 900;
         font-size: 1.3rem;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        color: white;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
+    .match-item:last-child {
+        border-bottom: none;
+    }
+    .club-name-left {
+        flex: 1;
+        text-align: left;
+    }
+    .club-name-right {
+        flex: 1;
+        text-align: right;
+    }
+    .vs-box {
+        flex: 0 0 60px;
+        background-color: #d32f2f;
+        color: white;
+        font-weight: 900;
+        font-size: 1.4rem;
+        border-radius: 20px;
+        text-align: center;
+        padding: 5px 0;
+        margin: 0 15px;
+        box-shadow: 0 0 10px rgba(211,47,47,0.9);
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    }
+    .footer-text {
+        margin-top: 30px;
+        font-weight: 900;
+        font-size: 1.3rem;
+        letter-spacing: 2px;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        z-index: 5;
     }
 </style>
+
+<div class="container-calendrier">
+    <div class="matchday-title">
+        MATCHDAY 1
+        <img src="/assets/WhatsApp Image 2025-06-23 à 13.44.55_704b8a70.jpg" alt="Custom Logo" style="height: 40px; margin-left: 15px;" />
+    </div>
+    <div class="match-date">29 juin – 02 juillet 2025</div>
+    {% if matchsAVenir is empty %}
+        <p class="no-match">Aucun match à venir.</p>
+    {% else %}
+        <div class="match-list">
+            {% for match in matchsAVenir %}
+                <div class="match-item" style="flex-direction: column; align-items: center;">
+                    <div style="display: flex; justify-content: space-between; width: 100%;">
+                        <div class="club-name-left">{{ match.club1.nom|upper }}</div>
+                        <div class="vs-box">VS</div>
+                        <div class="club-name-right">{{ match.club2.nom|upper }}</div>
+                    </div>
+                    <div class="match-date-time" style="color: #ddd; font-size: 0.9rem; font-weight: 600; margin-top: 5px; text-align: center; width: 100%;">
+                        {{ match.date|date('d M Y H:i') }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="footer-text">
+        FOOTBALL AS IT'S MEANT TO BE
+    </div>
+</div>
 {% endblock %}

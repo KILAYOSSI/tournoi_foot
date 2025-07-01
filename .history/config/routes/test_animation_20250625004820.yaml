@@ -1,0 +1,3 @@
+test_animation:
+    path: /test-animation
+    controller: App\Controller\TestAnimationController::index

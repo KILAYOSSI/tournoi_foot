@@ -1,0 +1,7 @@
+phase_qualificative:
+    path: /phase-qualificative
+    controller: App\Controller\HomeController::phaseQualificative
+
+phase_finale:
+    path: /phase-finale
+    controller: App\Controller\HomeController::phaseFinale

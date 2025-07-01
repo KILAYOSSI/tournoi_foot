@@ -1,0 +1,22 @@
+/* Playfair Display - chargement local des polices */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/playfair_display/PlayfairDisplay-Regular.woff2') format('woff2'),
+       url('../fonts/playfair_display/PlayfairDisplay-Regular.woff') format('woff'),
+       url('../fonts/playfair_display/PlayfairDisplay-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/playfair_display/PlayfairDisplay-Bold.woff2') format('woff2'),
+       url('../fonts/playfair_display/PlayfairDisplay-Bold.woff') format('woff'),
+       url('../fonts/playfair_display/PlayfairDisplay-Bold.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* Ajoutez d'autres variantes si nécessaire */

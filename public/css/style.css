@@ -1,11 +1,90 @@
 /* Style global pour le site */
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f6f8;
     margin: 0;
     padding: 0;
     color: #333;
+}
+
+/* Appliquer une police sophistiquée aux chiffres sur tout le site */
+.number-font {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-style: normal;
+    font-variant-numeric: oldstyle-nums proportional-nums;
+}
+
+/* Appliquer la police sophistiquée aux chiffres dans tout le site */
+body, body * {
+    font-feature-settings: "onum", "pnum";
+}
+
+/* Animation scintillante pour les chiffres des statistiques */
+@keyframes scintillement {
+    0%, 100% {
+        text-shadow:
+            0 0 5px #ffdd57,
+            0 0 10px #ffdd57,
+            0 0 20px #ffdd57,
+            0 0 30px #ffdd57;
+        color: #ffdd57;
+    }
+    50% {
+        text-shadow:
+            0 0 10px #fff,
+            0 0 20px #fff,
+            0 0 30px #fff,
+            0 0 40px #fff;
+        color: #fff;
+    }
+}
+
+/* Classe pour appliquer l'animation scintillante */
+.number-animated {
+    animation: scintillement 2s ease-in-out infinite;
+}
+
+/* Style test temporaire très visible */
+@keyframes clignotement {
+    0%, 100% {
+        color: red;
+        opacity: 1;
+    }
+    50% {
+        color: yellow;
+        opacity: 0.5;
+    }
+}
+
+.number-test {
+    animation: clignotement 1s linear infinite;
+    font-weight: 900;
+    font-size: 3rem;
+    color: red;
+}
+
+/* Styles spécifiques pour les cartes de statistiques */
+.stat-card {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ffdd57;
+    text-shadow:
+        0 0 5px #ffdd57,
+        0 0 10px #ffdd57,
+        0 0 20px #ffdd57;
+    transition: color 0.3s ease;
+}
+
+.stat-card:hover {
+    color: #fff;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 30px #fff;
 }
 
 a {
@@ -63,7 +142,7 @@ main {
     max-width: 1200px;
     margin: 30px auto;
     padding: 0 20px;
-    background-color: #fff;
+    background-color: transparent;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     min-height: 600px;
@@ -141,8 +220,8 @@ th {
 /* Styles pour les boîtes de statistiques */
 
 .stats-container {
-    background-color: #0d47a1 !important;
-    background: linear-gradient(135deg, #0d47a1, #1976d2) !important;
+    background-color: #0d47a1;
+    background: linear-gradient(135deg, #0d47a1, #1976d2);
     border-radius: 12px;
     padding: 20px;
     color: #0d47a1; /* couleur bleue pour le texte */
@@ -187,6 +266,20 @@ th {
 
     .navbar-menu li {
         margin: 10px 0;
+    }
+
+    /* Fix for navbar toggler button visibility */
+.navbar-toggler {
+    display: block;
+}
+
+    /* Fix for navbar collapse */
+    .navbar-collapse {
+        display: none;
+    }
+
+    .navbar-collapse.show {
+        display: block;
     }
 }
 
@@ -236,44 +329,169 @@ th {
     padding: 1rem;
 }
 
-.matchs-du-jour h2, .resultats-recents h2 {
-    margin-bottom: 1rem;
+/* Mega menu Cartons personnalisé */
+
+/* Uniformiser la taille des éléments du menu "Qui sommes-nous" */
+.navbar-nav > li > a.nav-link {
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-.list-group-item {
-    background-color: transparent;
+.navbar-nav > li > a.nav-link i {
+    margin-right: 8px;
+}
+
+.navbar-nav > li > a.nav-link:hover,
+.navbar-nav > li > a.nav-link.active {
+    background-color: #007bff;
     color: white;
-    border: none;
-    padding: 0.5rem 0;
 }
 
-.list-group-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.navbar-nav > li.dropdown.position-static:hover > .dropdown-menu {
+    display: block;
+    animation: fadeInScale 0.4s ease forwards;
 }
 
-.table-bordered {
-    border: 1px solid #0b2545;
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-.table-bordered th, .table-bordered td {
-    border: 1px solid #0b2545;
+.dropdown-menu {
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(255, 111, 145, 0.4);
+    font-family: 'Georgia', serif;
+    font-size: 1.3rem;
+    color: #ff4a75;
+    background: linear-gradient(135deg, #ffe6f0, #fff0f6);
+    padding: 2rem;
 }
 
-.bg-primary {
-    background-color: #0b2545 !important;
+.dropdown-menu a.dropdown-item {
+    transition: color 0.3s ease, transform 0.3s ease;
+    border-radius: 0.5rem;
+    padding: 0.8rem 1rem;
 }
 
-.bg-secondary {
-    background-color: #0a1f3a !important;
+.dropdown-menu a.dropdown-item:hover {
+    color: #fff;
+    background-color: #ff6f91;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px #ff6f91;
+    font-weight: bold;
 }
 
-.table-sm th, .table-sm td {
-    padding: 0.3rem;
+/* Style pour le texte du mega menu */
+
+.dropdown-menu .row > div {
+    padding: 0.5rem 1rem;
 }
 
-.form-select {
-    background-color: #0b2545;
-    color: white;
-    border: none;
-    width: auto;
+/* Style pour le lien Cartons dans la navbar */
+
+.navbar-nav > li.dropdown.position-static > a.nav-link {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ff4a75;
+    text-shadow: 0 0 5px #ff6f91;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav > li.dropdown.position-static > a.nav-link:hover {
+    color: #ff1a4d;
+    text-shadow: 0 0 10px #ff1a4d;
+}
+
+/* Ajout pour corriger l'affichage des images dans le carrousel et sections */
+
+/* Images du carrousel */
+#carouselImages .carousel-item img {
+    object-fit: cover;
+    height: 400px;
+    width: 100%;
+}
+
+/* Images des sections "Notre travail en action", "Qui sommes-nous", "Comment nous travaillons" */
+.section-images img {
+    object-fit: cover;
+    height: 400px;
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+/* Sections alignées avec le carrousel "En savoir plus" */
+.container-uefa {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+/* Animation de défilement horizontal (ticker) pour les textes sous les icônes dans elegant-features */
+.elegant-features .feature-box p {
+    display: block;
+    position: relative;
+    animation: ticker-scroll 8s linear infinite;
+    color: #ff4081;
+    font-weight: 700;
+    text-shadow:
+        0 0 5px #ff80ab,
+        0 0 10px #ff4081,
+        0 0 20px #e040fb,
+        0 0 30px #d500f9;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 150px;
+    text-align: center;
+}
+
+@keyframes ticker-scroll {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
+
+.elegant-features .feature-box img {
+    animation: icon-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes va-et-vient-sophistique {
+    0%, 100% {
+        left: 0;
+        color: #ff4081;
+        text-shadow:
+            0 0 5px #ff80ab,
+            0 0 10px #ff4081,
+            0 0 20px #e040fb,
+            0 0 30px #d500f9;
+    }
+    50% {
+        left: 30px; /* Augmenté de 15px à 30px */
+        color: #e040fb;
+        text-shadow:
+            0 0 10px #ea80fc,
+            0 0 20px #d500f9,
+            0 0 30px #aa00ff,
+            0 0 40px #7c4dff;
+    }
 }

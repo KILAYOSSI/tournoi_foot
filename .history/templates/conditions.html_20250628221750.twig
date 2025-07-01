@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Conditions d'Utilisation</title>
+  <link rel="stylesheet" href="{{ asset('css/playfair_display.css') }}" />
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(120deg, #fce3ec 0%, #f9e0ff 100%);
+      margin: 0;
+      padding: 0;
+      color: #4e2d4d;
+    }
+    header {
+      text-align: center;
+      padding: 50px;
+      background-color: #fff;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    }
+    header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4rem;
+      color: #b52e6e;
+      margin: 0;
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 40px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.08);
+    }
+    p {
+      font-size: 1.2rem;
+      line-height: 2;
+      margin-bottom: 1.2em;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+    }
+    a {
+      color: #b52e6e;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Conditions d'Utilisation</h1>
+  </header>
+  <main>
+    <p>En accédant à ce site, vous acceptez de respecter nos conditions d'utilisation. Nous vous demandons d’utiliser ce service de manière respectueuse et légale.</p>
+    <p>Toute reproduction, distribution ou utilisation abusive du contenu est interdite sans autorisation écrite. Le respect mutuel est la clé d’une belle expérience pour tous.</p>
+    <p>Nous nous réservons le droit de modifier ces conditions à tout moment. Vous serez informé de toute mise à jour importante.</p>
+  </main>
+  <footer>
+    <a href="{{ path('home') }}">Retour à l'accueil</a>
+  </footer>
+</body>
+</html>
