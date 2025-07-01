@@ -18,3 +18,9 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+# Retirer Dockerfile de la liste d'exclusion si présent
+!Dockerfile
+
+# Retirer Dockerfile de la liste d'exclusion si présent
+!Dockerfile
